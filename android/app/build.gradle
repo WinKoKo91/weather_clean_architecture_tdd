@@ -31,7 +31,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    ndkVersion "25.1.8937393"
+
 
     namespace "com.kwinlab.sunshine"
     compileSdkVersion flutter.compileSdkVersion
@@ -59,6 +59,10 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        ndkVersion "25.1.8937393"
+        ndk {
+            debugSymbolLevel 'FULL'
+        }
     }
 
     signingConfigs {

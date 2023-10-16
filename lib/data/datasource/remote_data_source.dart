@@ -28,8 +28,9 @@ class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
     }else{
 
       logger.e(response.body,error: response);
+      var result  = json.decode(response.body);
 
-      throw ServerException();
+      throw ServerException(message :result['message']);
     }
   }
 }

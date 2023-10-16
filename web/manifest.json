@@ -1,6 +1,6 @@
 {
-    "name": "weather_clean_architecture_tdd",
-    "short_name": "weather_clean_architecture_tdd",
+    "name": "sunshine",
+    "short_name": "sunshine",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

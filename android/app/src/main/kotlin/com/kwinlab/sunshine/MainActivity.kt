@@ -1,4 +1,4 @@
-package com.example.weather_clean_architecture_tdd
+package com.kwinlab.sunshine
 
 import io.flutter.embedding.android.FlutterActivity
 

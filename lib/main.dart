@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_clean_architecture_tdd/presentation/bloc/weather_bloc.dart';
-import 'package:weather_clean_architecture_tdd/presentation/pages/weather_page.dart';
+import 'package:sunshine/presentation/bloc/weather_bloc.dart';
+import 'package:sunshine/presentation/pages/weather_page.dart';
 
 import 'injection_container.dart';
 

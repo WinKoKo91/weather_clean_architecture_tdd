@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weather_clean_architecture_tdd/core/error/failure.dart';
-import 'package:weather_clean_architecture_tdd/domain/entities/weather.dart';
-import 'package:weather_clean_architecture_tdd/presentation/bloc/weather_bloc.dart';
-import 'package:weather_clean_architecture_tdd/presentation/bloc/weather_event.dart';
-import 'package:weather_clean_architecture_tdd/presentation/bloc/weather_state.dart';
+import 'package:sunshine/core/error/failure.dart';
+import 'package:sunshine/domain/entities/weather.dart';
+import 'package:sunshine/presentation/bloc/weather_bloc.dart';
+import 'package:sunshine/presentation/bloc/weather_event.dart';
+import 'package:sunshine/presentation/bloc/weather_state.dart';
 import 'package:bloc_test/bloc_test.dart';
 import '../../helpers/test_helper.mocks.dart';
 

@@ -1,5 +1,5 @@
-name: weather_clean_architecture_tdd
-description: A new Flutter project.
+name: sunshine
+description: Sun Shine Weather
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -28,6 +28,16 @@ dev_dependencies:
   build_runner: ^2.1.2
   mockito: ^5.0.15
   mocktail: ^0.2.0
+  flutter_launcher_icons: ^0.13.1
+  change_app_package_name: ^1.1.0
+
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/weather_logo.png"
+  min_sdk_android: 21
 
 flutter:
   uses-material-design: true

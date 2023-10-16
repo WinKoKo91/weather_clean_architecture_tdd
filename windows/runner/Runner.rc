@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "weather_clean_architecture_tdd" "\0"
+            VALUE "FileDescription", "sunshine" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "weather_clean_architecture_tdd" "\0"
+            VALUE "InternalName", "sunshine" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "weather_clean_architecture_tdd.exe" "\0"
-            VALUE "ProductName", "weather_clean_architecture_tdd" "\0"
+            VALUE "OriginalFilename", "sunshine.exe" "\0"
+            VALUE "ProductName", "sunshine" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

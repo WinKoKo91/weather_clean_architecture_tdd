@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:logger/logger.dart';
 
 import '../../core/constants.dart';
@@ -14,7 +13,10 @@ abstract class WeatherRemoteDataSource {
 
 class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
   final http.Client client;
-  var logger = Logger(printer: PrettyPrinter(),);
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
+
   WeatherRemoteDataSourceImpl({required this.client});
 
   @override
@@ -25,12 +27,10 @@ class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
     if (response.statusCode == 200) {
       logger.i(response.body);
       return WeatherModel.fromJson(json.decode(response.body));
-    }else{
-
-      logger.e(response.body,error: response);
-      var result  = json.decode(response.body);
-
-      throw ServerException(message :result['message']);
+    } else {
+      logger.e(response.body, error: response);
+      var result = json.decode(response.body);
+      throw ServerException(message: result['message']);
     }
   }
 }

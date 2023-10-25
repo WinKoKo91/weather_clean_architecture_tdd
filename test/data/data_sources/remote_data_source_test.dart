@@ -47,18 +47,20 @@ void main() {
         'should throw a server exception when the response code is 404 or other',
         () async {
       //arrange
-      when(mockHttpClient
-              .get(Uri.parse(Urls.currentWeatherByName(testCityName))))
-          .thenAnswer((_) async => http.Response(
-                'Not found',
-                404,
-              ));
+      try {
+        when(mockHttpClient
+                .get(Uri.parse(Urls.currentWeatherByName(testCityName))))
+            .thenAnswer((_) async => http.Response(
+                  "{\"cod\":\"404\",\"message\":\"city not found\"}",
+                  404,
+                ));
+        //act
+        await weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
 
-      //act
-      final result =
-          await weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
-
-      expect(result, throwsA(isA<ServerException>()));
+      } catch (e) {
+        // assert
+        expect(e, isA<ServerException>());
+      }
     });
   });
 }

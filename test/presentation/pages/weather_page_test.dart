@@ -4,6 +4,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sunshine/domain/entities/weather.dart';
 import 'package:sunshine/presentation/bloc/weather_bloc.dart';
@@ -15,6 +16,7 @@ class MockWeatherBloc extends MockBloc<WeatherEvent, WeatherState>
     implements WeatherBloc {}
 
 void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late MockWeatherBloc mockWeatherBloc;
 
   setUp(() {

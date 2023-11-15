@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
+import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/constants.dart';
 import 'package:sunshine/core/error/exception.dart';
 import 'package:sunshine/data/datasource/remote_data_source.dart';
 import 'package:sunshine/data/model/weather_model.dart';
-import 'package:sunshine/domain/entities/weather.dart';
+
 import '../../helpers/json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
 

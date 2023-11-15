@@ -34,7 +34,7 @@ void main() {
     humidity: 70,
   );
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<WeatherBloc>(
       create: (context) => mockWeatherBloc,
       child: MaterialApp(
@@ -48,7 +48,7 @@ void main() {
 
     when(() => mockWeatherBloc.state).thenReturn(WeatherEmpty());
 
-    await widgetTester.pumpWidget(_makeTestableWidget(const WeatherPage()));
+    await widgetTester.pumpWidget(makeTestableWidget(const WeatherPage()));
     var textField = find.byType(TextField);
     expect(textField, findsOneWidget);
     await widgetTester.enterText(textField, 'New York');
@@ -63,7 +63,7 @@ void main() {
       when(() => mockWeatherBloc.state).thenReturn(WeatherLoading());
 
       //act
-      await widgetTester.pumpWidget(_makeTestableWidget(const WeatherPage()));
+      await widgetTester.pumpWidget(makeTestableWidget(const WeatherPage()));
 
       //assert
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -77,7 +77,7 @@ void main() {
       when(() => mockWeatherBloc.state).thenReturn(const WeatherLoaded(testWeather));
 
       //act
-      await widgetTester.pumpWidget(_makeTestableWidget(const WeatherPage()));
+      await widgetTester.pumpWidget(makeTestableWidget(const WeatherPage()));
       await widgetTester.pumpAndSettle(const Duration(milliseconds:300));
       //assert
       expect(find.byKey(const Key('weather_data')), findsOneWidget);

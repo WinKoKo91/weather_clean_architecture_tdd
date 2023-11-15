@@ -1,11 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 import 'package:sunshine/presentation/bloc/weather_bloc.dart';
 
 import 'data/datasource/remote_data_source.dart';
 import 'data/repository/weather_repository_impl.dart';
-
-import 'package:http/http.dart' as http;
-
 import 'domain/repositories/weather_repository.dart';
 import 'domain/usecases/get_current_weather.dart';
 

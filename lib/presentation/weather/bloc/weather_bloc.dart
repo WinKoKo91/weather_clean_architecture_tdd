@@ -1,9 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:sunshine/presentation/bloc/weather_event.dart';
-import 'package:sunshine/presentation/bloc/weather_state.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_event.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_state.dart';
 
-import '../../domain/usecases/get_current_weather.dart';
+import '../../../domain/usecases/get_current_weather.dart';
+
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final GetCurrentWeatherUseCase _getCurrentWeatherUserCase;

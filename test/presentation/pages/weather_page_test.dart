@@ -7,10 +7,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sunshine/domain/entities/weather.dart';
-import 'package:sunshine/presentation/bloc/weather_bloc.dart';
-import 'package:sunshine/presentation/bloc/weather_event.dart';
-import 'package:sunshine/presentation/bloc/weather_state.dart';
-import 'package:sunshine/presentation/pages/weather_page.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_bloc.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_event.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_state.dart';
+import 'package:sunshine/presentation/weather/pages/weather_page.dart';
 
 class MockWeatherBloc extends MockBloc<WeatherEvent, WeatherState>
     implements WeatherBloc {}
@@ -45,10 +45,9 @@ void main() {
 
   testWidgets("text field should trigger state to change from empty to loading",
       (widgetTester) async {
-
     when(() => mockWeatherBloc.state).thenReturn(WeatherEmpty());
 
-    await widgetTester.pumpWidget(makeTestableWidget(const WeatherPage()));
+    await widgetTester.pumpWidget(makeTestableWidget( WeatherPage()));
     var textField = find.byType(TextField);
     expect(textField, findsOneWidget);
     await widgetTester.enterText(textField, 'New York');
@@ -63,7 +62,7 @@ void main() {
       when(() => mockWeatherBloc.state).thenReturn(WeatherLoading());
 
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(const WeatherPage()));
+      await widgetTester.pumpWidget(makeTestableWidget(WeatherPage()));
 
       //assert
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -74,11 +73,12 @@ void main() {
     'should show widget contain weather data when state is weather loaded',
     (widgetTester) async {
       //arrange
-      when(() => mockWeatherBloc.state).thenReturn(const WeatherLoaded(testWeather));
+      when(() => mockWeatherBloc.state)
+          .thenReturn(const WeatherLoaded(testWeather));
 
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(const WeatherPage()));
-      await widgetTester.pumpAndSettle(const Duration(milliseconds:300));
+      await widgetTester.pumpWidget(makeTestableWidget(WeatherPage()));
+      await widgetTester.pumpAndSettle(const Duration(milliseconds: 300));
       //assert
       expect(find.byKey(const Key('weather_data')), findsOneWidget);
     },

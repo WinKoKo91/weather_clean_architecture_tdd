@@ -22,11 +22,11 @@ import 'package:sunshine/domain/repositories/weather_repository.dart'
     as _i4;
 import 'package:sunshine/domain/usecases/get_current_weather.dart'
     as _i11;
-import 'package:sunshine/presentation/bloc/weather_bloc.dart'
+import 'package:sunshine/presentation/weather/bloc/weather_bloc.dart'
     as _i12;
-import 'package:sunshine/presentation/bloc/weather_event.dart'
+import 'package:sunshine/presentation/weather/bloc/weather_event.dart'
     as _i13;
-import 'package:sunshine/presentation/bloc/weather_state.dart'
+import 'package:sunshine/presentation/weather/bloc/weather_state.dart'
     as _i5;
 
 // ignore_for_file: type=lint

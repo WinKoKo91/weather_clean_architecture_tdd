@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/error/failure.dart';
 import 'package:sunshine/domain/entities/weather.dart';
-import 'package:sunshine/presentation/bloc/weather_bloc.dart';
-import 'package:sunshine/presentation/bloc/weather_event.dart';
-import 'package:sunshine/presentation/bloc/weather_state.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_bloc.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_event.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_state.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
@@ -42,7 +42,7 @@ void main() {
             .thenAnswer((_) async => const Right(testWeather));
         return weatherBloc;
       },
-      act: (bloc) => bloc.add(OnCityChanged(testCityName)),
+      act: (bloc) => bloc.add(const OnCityChanged(testCityName)),
       wait: const Duration(milliseconds: 500),
       expect: () => [WeatherLoading(), const WeatherLoaded(testWeather)]);
 

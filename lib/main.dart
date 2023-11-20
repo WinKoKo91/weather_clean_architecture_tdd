@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sunshine/presentation/bloc/weather_bloc.dart';
-import 'package:sunshine/presentation/pages/weather_page.dart';
+import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/breakpoint.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_bloc.dart';
+import 'package:sunshine/presentation/weather/bloc/weather_event.dart';
+import 'package:sunshine/presentation/weather/pages/weather_page.dart';
 
 import 'injection_container.dart';
+import 'presentation/home/pages/home_page.dart';
 
 void main() {
   setupLocator();
@@ -22,28 +27,40 @@ class MyApp extends StatelessWidget {
             create: (_) => locator<WeatherBloc>(),
           )
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
           title: 'Flutter Demo',
-          theme: ThemeData(
-            // This is the theme of your application.
-            //
-            // TRY THIS: Try running your application with "flutter run". You'll see
-            // the application has a blue toolbar. Then, without quitting the app,
-            // try changing the seedColor in the colorScheme below to Colors.green
-            // and then invoke "hot reload" (save your changes or press the "hot
-            // reload" button in a Flutter-supported IDE, or press "r" if you used
-            // the command line to start the app).
-            //
-            // Notice that the counter didn't reset back to zero; the application
-            // state is not lost during the reload. To reset the state, use hot
-            // restart instead.
-            //
-            // This works for code too, not just values: Most code changes can be
-            // tested with just a hot reload.
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          themeMode: ThemeMode.dark,
+          theme: ThemeData.dark(
             useMaterial3: true,
           ),
-          home: const WeatherPage(),
+          routerConfig: router,
+          builder: (context, child) => ResponsiveBreakpoints.builder(
+            child: child!,
+            breakpoints: [
+              const Breakpoint(start: 0, end: 450, name: MOBILE),
+              const Breakpoint(start: 451, end: 800, name: TABLET),
+              const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+              const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+            ],
+          ),
         ));
   }
 }
+
+final router = GoRouter(
+  routes: [
+    GoRoute(path: '/', builder: (_, __) => HomePage()),
+    GoRoute(
+        path: '/weather',
+        name: 'weather',
+        builder: (context, state) {
+          String city = state.uri.queryParameters['city'] ?? "";
+          return BlocProvider(
+            create: (_) => locator<WeatherBloc>()..add(OnCityChanged(city)),
+            child: WeatherPage(
+              city: city,
+            ),
+          );
+        })
+  ],
+);

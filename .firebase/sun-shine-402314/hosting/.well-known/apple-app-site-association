@@ -1,0 +1,11 @@
+{
+  "applinks": {
+      "apps": [],
+      "details": [
+      {
+        "appID": "3S9F8G8PCL.com.kwinlab.sunshine",
+        "paths": ["*"]
+      }
+    ]
+  }
+}

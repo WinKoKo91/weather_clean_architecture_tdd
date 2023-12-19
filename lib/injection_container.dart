@@ -6,10 +6,13 @@ import 'data/datasource/remote_data_source.dart';
 import 'data/repository/weather_repository_impl.dart';
 import 'domain/repositories/weather_repository.dart';
 import 'domain/usecases/get_current_weather.dart';
+import 'presentation/home/bloc/home_bloc.dart';
 
 final locator = GetIt.instance;
 
 void setupLocator() {
+  // bloc
+  locator.registerFactory(() => HomeBloc(locator()));
   // bloc
   locator.registerFactory(() => WeatherBloc(locator()));
 

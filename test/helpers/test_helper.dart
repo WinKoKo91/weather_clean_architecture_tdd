@@ -6,5 +6,4 @@ import 'package:sunshine/domain/usecases/get_current_weather.dart';
 import 'package:sunshine/presentation/weather/bloc/weather_bloc.dart';
 
 @GenerateMocks([WeatherRepository, WeatherRemoteDataSource, GetCurrentWeatherUseCase, WeatherBloc], customMocks:[MockSpec<http.Client> (as: #MockHttpClient)],)
-
 void main(){}

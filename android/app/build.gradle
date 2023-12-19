@@ -63,6 +63,7 @@ android {
         ndk {
             debugSymbolLevel 'FULL'
         }
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -99,5 +100,7 @@ flutter {
 }
 
 dependencies {
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
     implementation 'com.google.android.material:material:1.9.0'
 }

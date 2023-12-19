@@ -11,7 +11,7 @@ import 'injection_container.dart';
 import 'presentation/home/pages/home_page.dart';
 
 void main() {
-  //setPathUrlStrategy();
+  setPathUrlStrategy();
   setupLocator();
   runApp(const MyApp());
 }

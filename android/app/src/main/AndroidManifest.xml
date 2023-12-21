@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -30,14 +31,14 @@
                 android:name="flutter_deeplinking_enabled"
                 android:value="true" />
 
-            <intent-filter android:autoVerify="true">
+            <intent-filter android:autoVerify="true"  tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" />
-                <data android:scheme="http" />
-                <data android:host="sun-shine-402314.web.app" android:pathPattern="/*"/>
+                <data android:host="sun-shine-402314.web.app" android:pathPrefix="/weather"/>
+                <data android:host="sun-shine-402314.firebaseapp.com" android:pathPrefix="/weather"/>
 
             </intent-filter>
 

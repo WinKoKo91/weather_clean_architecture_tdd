@@ -16,11 +16,12 @@ class WeatherLoading extends WeatherState {}
 
 class WeatherLoaded extends WeatherState {
   final WeatherEntity result;
+  final String dateTime;
 
-  const WeatherLoaded(this.result);
+  const WeatherLoaded(this.result, this.dateTime);
 
   @override
-  List<Object?> get props => [result];
+  List<Object?> get props => [result, dateTime];
 }
 
 class WeatherLoadFailure extends WeatherState {

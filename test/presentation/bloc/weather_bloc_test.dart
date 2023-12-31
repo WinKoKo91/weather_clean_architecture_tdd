@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/error/failure.dart';
 import 'package:sunshine/domain/entities/weather.dart';
-import 'package:sunshine/presentation/weather/bloc/weather_bloc.dart';
-import 'package:sunshine/presentation/weather/bloc/weather_event.dart';
-import 'package:sunshine/presentation/weather/bloc/weather_state.dart';
+import 'package:sunshine/presentation/home/bloc/weather_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/weather_event.dart';
+import 'package:sunshine/presentation/home/bloc/weather_state.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
@@ -27,7 +27,11 @@ void main() {
     temperature: 302.28,
     pressure: 1009,
     humidity: 70,
+    dt: 1703998332,
+    country: 'US'
   );
+
+  const String testDatetime = '12/31/2023 11:22 AM';
 
   const testCityName = 'New York';
 
@@ -44,7 +48,7 @@ void main() {
       },
       act: (bloc) => bloc.add(const OnCityChanged(testCityName)),
       wait: const Duration(milliseconds: 500),
-      expect: () => [WeatherLoading(), const WeatherLoaded(testWeather)]);
+      expect: () => [WeatherLoading(), const WeatherLoaded(testWeather,testDatetime)]);
 
   blocTest<WeatherBloc, WeatherState>(
       'should emit [WeatherLoading, WeatherLoadFailure] when get data is unsuccessful',
@@ -60,3 +64,5 @@ void main() {
             const WeatherLoadFailure('Server failure'),
           ]);
 }
+
+

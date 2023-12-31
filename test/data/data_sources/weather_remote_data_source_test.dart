@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/constants.dart';
 import 'package:sunshine/core/error/exception.dart';
-import 'package:sunshine/data/datasource/remote_data_source.dart';
+import 'package:sunshine/data/datasource/weather_remote_data_source.dart';
+import 'package:sunshine/data/model/location_model.dart';
 import 'package:sunshine/data/model/weather_model.dart';
 
 import '../../helpers/json_reader.dart';
@@ -20,6 +23,8 @@ void main() {
   });
 
   const testCityName = "New York";
+
+
 
   group('get current weather', () {
     test('should return weather model when the response code is 200', () async {
@@ -56,7 +61,6 @@ void main() {
                 ));
         //act
         await weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
-
       } catch (e) {
         // assert
         expect(e, isA<ServerException>());

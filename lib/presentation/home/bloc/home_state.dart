@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../domain/entities/location.dart';
 import '../../../domain/entities/weather.dart';
 
 abstract class HomeState extends Equatable {
@@ -29,6 +30,19 @@ class HomeFailState extends HomeState {
 
   @override
   List<Object?> get props => [errorMessage];
+}
+
+class HomeSearchCityResult extends HomeState {
+  final List<LocationEntity> locations;
+
+  const HomeSearchCityResult(this.locations);
+
+  @override
+  List<Object?> get props => [locations];
+}
+
+class HomeCitySearchState extends HomeState {
+  const HomeCitySearchState();
 }
 
 class HomeQueryWeather extends HomeState {}

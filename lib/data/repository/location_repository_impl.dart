@@ -7,26 +7,27 @@ import '../../core/error/exception.dart';
 import '../../core/error/failure.dart';
 import '../../core/utils/typedef.dart';
 import '../../domain/entities/weather.dart';
+import '../../domain/repositories/location_repository.dart';
 import '../../domain/repositories/weather_repository.dart';
+import '../datasource/location_remote_data_source.dart';
 import '../datasource/weather_remote_data_source.dart';
 
-class WeatherRepositoryImpl extends WeatherRepository {
-  final WeatherRemoteDataSource weatherRemoteDataSource;
+class LocationRepositoryImpl extends LocationRepository {
+  final LocationRemoteDataSource locationRemoteDataSource;
 
-  WeatherRepositoryImpl({required this.weatherRemoteDataSource});
+  LocationRepositoryImpl({required this.locationRemoteDataSource});
 
   @override
-  ResultFuture< WeatherEntity> getCurrentWeather(
+  ResultFuture<List<LocationEntity>> searchCityListByName(
       String cityName) async {
     try {
-      final result = await weatherRemoteDataSource.getCurrentWeather(cityName);
-      return Right(result.toEntity());
+      final result =
+          await locationRemoteDataSource.searchCityListByName(cityName);
+      return Right(result.map((e) => e.toEntity()).toList());
     } on ServerException catch (error) {
-      return Left(ServerFailure(error.message??"An error has occurred"));
+      return Left(ServerFailure(error.message ?? "An error has occurred"));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
-
-
 }

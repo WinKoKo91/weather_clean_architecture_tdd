@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
-import 'package:sunshine/presentation/weather/bloc/weather_bloc.dart';
-import 'package:sunshine/presentation/weather/bloc/weather_event.dart';
-import 'package:sunshine/presentation/weather/pages/weather_page.dart';
+import 'package:sunshine/presentation/home/bloc/weather_bloc.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'injection_container.dart';
@@ -34,7 +32,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Sun Shine',
         themeMode: ThemeMode.dark,
-
         theme: ThemeData.dark(
           useMaterial3: true,
         ),
@@ -46,19 +43,6 @@ class MyApp extends StatelessWidget {
 
 final router = GoRouter(
   routes: [
-    GoRoute(path: '/', builder: (_, __) => HomePage(), routes: [
-      GoRoute(
-          path: 'weather',
-          name: 'weather',
-          builder: (context, state) {
-            String city = state.uri.queryParameters['city'] ?? "";
-            return BlocProvider(
-              create: (_) => locator<WeatherBloc>()..add(OnCityChanged(city)),
-              child: WeatherPage(
-                city: city,
-              ),
-            );
-          })
-    ]),
+    GoRoute(path: '/', builder: (_, __) => HomePage(), routes: []),
   ],
 );

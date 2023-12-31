@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import 'package:sunshine/data/model/location_model.dart';
 
 import '../../core/constants.dart';
 import '../../core/error/exception.dart';
@@ -9,6 +10,7 @@ import '../model/weather_model.dart';
 
 abstract class WeatherRemoteDataSource {
   Future<WeatherModel> getCurrentWeather(String cityName);
+
 }
 
 class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
@@ -33,4 +35,6 @@ class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
       throw ServerException(message: result['message']);
     }
   }
+
+
 }

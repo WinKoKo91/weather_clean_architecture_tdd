@@ -5,8 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/error/exception.dart';
 import 'package:sunshine/core/error/failure.dart';
+import 'package:sunshine/data/model/location_model.dart';
 import 'package:sunshine/data/model/weather_model.dart';
 import 'package:sunshine/data/repository/weather_repository_impl.dart';
+import 'package:sunshine/domain/entities/location.dart';
 import 'package:sunshine/domain/entities/weather.dart';
 
 import '../../helpers/test_helper.mocks.dart';
@@ -14,7 +16,6 @@ import '../../helpers/test_helper.mocks.dart';
 void main() {
   late MockWeatherRemoteDataSource mockWeatherRemoteDataSource;
   late WeatherRepositoryImpl weatherRepositoryImpl;
-
 
   setUp(() {
     mockWeatherRemoteDataSource = MockWeatherRemoteDataSource();
@@ -31,6 +32,8 @@ void main() {
     temperature: 302.28,
     pressure: 1009,
     humidity: 70,
+    dt:1703998332,
+    country: 'US'
   );
 
   const testWeatherEntity = WeatherEntity(
@@ -41,21 +44,25 @@ void main() {
     temperature: 302.28,
     pressure: 1009,
     humidity: 70,
+    dt: 1703998332,
+    country: 'US'
   );
 
   const testCityName = 'New York';
 
-  group('get current weather', () {
 
+
+  group('get current weather', () {
     test(
       'should return current weather when a call to data source is successful',
-          () async {
+      () async {
         // arrange
         when(mockWeatherRemoteDataSource.getCurrentWeather(testCityName))
             .thenAnswer((_) async => testWeatherModel);
 
         // act
-        final result = await weatherRepositoryImpl.getCurrentWeather(testCityName);
+        final result =
+            await weatherRepositoryImpl.getCurrentWeather(testCityName);
 
         // assert
         expect(result, equals(const Right(testWeatherEntity)));
@@ -64,36 +71,39 @@ void main() {
 
     test(
       'should return server failure when a call to data source is unsuccessful',
-          () async {
+      () async {
         // arrange
         when(mockWeatherRemoteDataSource.getCurrentWeather(testCityName))
             .thenThrow(ServerException());
 
         // act
-        final result = await weatherRepositoryImpl.getCurrentWeather(testCityName);
+        final result =
+            await weatherRepositoryImpl.getCurrentWeather(testCityName);
 
         // assert
-        expect(result, equals(const Left(ServerFailure('An error has occurred'))));
+        expect(
+            result, equals(const Left(ServerFailure('An error has occurred'))));
       },
     );
 
     test(
       'should return connection failure when the device has no internet',
-          () async {
+      () async {
         // arrange
         when(mockWeatherRemoteDataSource.getCurrentWeather(testCityName))
-            .thenThrow(const SocketException('Failed to connect to the network'));
+            .thenThrow(
+                const SocketException('Failed to connect to the network'));
 
         // act
-        final result = await weatherRepositoryImpl.getCurrentWeather(testCityName);
+        final result =
+            await weatherRepositoryImpl.getCurrentWeather(testCityName);
 
         // assert
-        expect(result, equals(const Left(ConnectionFailure('Failed to connect to the network'))));
+        expect(
+            result,
+            equals(const Left(
+                ConnectionFailure('Failed to connect to the network'))));
       },
     );
-
   });
-
-
-
 }

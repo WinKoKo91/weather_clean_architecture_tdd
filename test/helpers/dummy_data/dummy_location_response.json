@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Yangon",
+    "local_names": {
+      "zh": "仰光",
+      "my": "ရန်ကုန်",
+      "hi": "यांगून",
+      "da": "Rangoon",
+      "pl": "Rangun",
+      "bn": "ইয়াঙ্গুন",
+      "vi": "Ngưỡng Quang",
+      "oc": "Rangon",
+      "es": "Rangún",
+      "feature_name": "Rangoon",
+      "fr": "Rangoun",
+      "ascii": "Rangoon",
+      "cs": "Rangún",
+      "eu": "Yangon",
+      "ru": "Янгон",
+      "or": "ରେଙ୍ଗୁନ",
+      "lt": "Rangūnas",
+      "sk": "Rangún",
+      "ku": "Yangon",
+      "ja": "ヤンゴン",
+      "kn": "ಯಂಗೊನ್",
+      "de": "Rangun",
+      "en": "Yangon",
+      "ko": "양곤",
+      "uk": "Янгон",
+      "et": "Yangon",
+      "it": "Yangon"
+    },
+    "lat": 16.7967129,
+    "lon": 96.1609916,
+    "country": "MM",
+    "state": "Yangon"
+  }
+]

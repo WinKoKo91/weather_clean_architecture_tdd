@@ -24,7 +24,9 @@ void main() {
       iconCode: '02d',
       temperature: 302.28,
       pressure: 1009,
-      humidity: 70);
+      country: 'MM',
+      humidity: 70,
+  dt: 1703998332);
 
   test('should get current weather detail from the repository', () async {
     // arrange

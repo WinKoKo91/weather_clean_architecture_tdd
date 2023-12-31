@@ -7,10 +7,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sunshine/domain/entities/weather.dart';
-import 'package:sunshine/presentation/weather/bloc/weather_bloc.dart';
-import 'package:sunshine/presentation/weather/bloc/weather_event.dart';
-import 'package:sunshine/presentation/weather/bloc/weather_state.dart';
-import 'package:sunshine/presentation/weather/pages/weather_page.dart';
+import 'package:sunshine/presentation/home/bloc/weather_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/weather_event.dart';
+import 'package:sunshine/presentation/home/bloc/weather_state.dart';
+import 'package:sunshine/presentation/home/pages/home_page.dart';
 
 class MockWeatherBloc extends MockBloc<WeatherEvent, WeatherState>
     implements WeatherBloc {}
@@ -25,14 +25,15 @@ void main() {
   });
 
   const testWeather = WeatherEntity(
-    cityName: 'New York',
-    main: 'Clouds',
-    description: 'few clouds',
-    iconCode: '02d',
-    temperature: 302.28,
-    pressure: 1009,
-    humidity: 70,
-  );
+      cityName: 'New York',
+      main: 'Clouds',
+      description: 'few clouds',
+      iconCode: '02d',
+      temperature: 302.28,
+      pressure: 1009,
+      humidity: 70,
+      country: 'US',
+      dt: 1703998332);
 
   Widget makeTestableWidget(Widget body) {
     return BlocProvider<WeatherBloc>(
@@ -47,7 +48,7 @@ void main() {
       (widgetTester) async {
     when(() => mockWeatherBloc.state).thenReturn(WeatherEmpty());
 
-    await widgetTester.pumpWidget(makeTestableWidget( WeatherPage()));
+    await widgetTester.pumpWidget(makeTestableWidget(HomePage()));
     var textField = find.byType(TextField);
     expect(textField, findsOneWidget);
     await widgetTester.enterText(textField, 'New York');
@@ -62,7 +63,7 @@ void main() {
       when(() => mockWeatherBloc.state).thenReturn(WeatherLoading());
 
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(WeatherPage()));
+      await widgetTester.pumpWidget(makeTestableWidget(HomePage()));
 
       //assert
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -74,10 +75,10 @@ void main() {
     (widgetTester) async {
       //arrange
       when(() => mockWeatherBloc.state)
-          .thenReturn(const WeatherLoaded(testWeather));
+          .thenReturn(const WeatherLoaded(testWeather,'12/31/2023 11:22 AM'));
 
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(WeatherPage()));
+      await widgetTester.pumpWidget(makeTestableWidget(HomePage()));
       await widgetTester.pumpAndSettle(const Duration(milliseconds: 300));
       //assert
       expect(find.byKey(const Key('weather_data')), findsOneWidget);

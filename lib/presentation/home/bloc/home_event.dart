@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 
 abstract class HomeEvent extends Equatable {
@@ -11,6 +12,15 @@ class OnCitySubmit extends HomeEvent {
   final String cityName;
 
   const OnCitySubmit(this.cityName);
+
+  @override
+  List<Object?> get props => [cityName];
+}
+
+class OnCityChanged extends HomeEvent {
+  final String cityName;
+
+  const OnCityChanged(this.cityName);
 
   @override
   List<Object?> get props => [cityName];

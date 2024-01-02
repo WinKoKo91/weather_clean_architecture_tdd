@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/constants.dart';
-import '../bloc/weather_bloc.dart';
-import '../bloc/weather_state.dart';
+import '../bloc/home_bloc.dart';
+import '../bloc/home_state.dart';
 
 class WeatherWidget extends StatelessWidget {
   WeatherWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherBloc, WeatherState>(
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         if (state is WeatherLoading) {
           return const Center(
@@ -25,6 +25,7 @@ class WeatherWidget extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 key: const Key('weather_data'),
                 children: [
                   const Text(
@@ -54,24 +55,30 @@ class WeatherWidget extends StatelessWidget {
                         fontSize: 15.0, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 8.0),
-                  Divider(),
+                  const Divider(),
                   const SizedBox(height: 12.0),
                   Row(
                     children: [
-                      Icon(Icons.calendar_today, color: Colors.grey,),
-                      SizedBox(
+                      const Icon(
+                        Icons.calendar_today,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
                         width: 8,
                       ),
                       Text(state.dateTime),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Row(
                     children: [
-                      Icon(Icons.location_on_outlined, color: Colors.grey,),
-                      SizedBox(
+                      const Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
                         width: 8,
                       ),
                       Text("${state.result.cityName}, ${state.result.country}"),

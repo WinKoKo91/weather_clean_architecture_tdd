@@ -12,17 +12,6 @@ abstract class HomeState extends Equatable {
 
 class HomeInitState extends HomeState {}
 
-class HomeLoadingState extends HomeState {}
-
-class HomeSuccessState extends HomeState {
-  final String cityName;
-
-  const HomeSuccessState(this.cityName);
-
-  @override
-  List<Object?> get props => [cityName];
-}
-
 class HomeFailState extends HomeState {
   final String errorMessage;
 
@@ -32,17 +21,39 @@ class HomeFailState extends HomeState {
   List<Object?> get props => [errorMessage];
 }
 
-class HomeSearchCityResult extends HomeState {
+class LocationSearchSuccessState extends HomeState {
   final List<LocationEntity> locations;
 
-  const HomeSearchCityResult(this.locations);
+  const LocationSearchSuccessState(this.locations);
 
   @override
   List<Object?> get props => [locations];
 }
 
-class HomeCitySearchState extends HomeState {
-  const HomeCitySearchState();
+class LocationSearchingState extends HomeState {}
+
+
+class WeatherLoaded extends HomeState {
+  final WeatherEntity result;
+  final String dateTime;
+
+  const WeatherLoaded(this.result, this.dateTime);
+
+  @override
+  List<Object?> get props => [result, dateTime];
 }
 
-class HomeQueryWeather extends HomeState {}
+
+
+class WeatherLoadFailure extends HomeState {
+  final String message;
+
+  const WeatherLoadFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+
+class WeatherLoading extends HomeState {}
+

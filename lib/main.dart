@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/weather_bloc.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'injection_container.dart';
@@ -23,11 +22,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => locator<WeatherBloc>(),
-        ),
-        BlocProvider(
           create: (_) => locator<HomeBloc>(),
-        )
+        ),
+
       ],
       child: MaterialApp.router(
         title: 'Sun Shine',

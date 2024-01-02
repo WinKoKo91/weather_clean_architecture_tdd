@@ -1,40 +1,49 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sunshine/presentation/home/bloc/home_event.dart';
+import 'package:rxdart/transformers.dart';
 
 import '../../../domain/usecases/get_current_weather.dart';
 import '../../../domain/usecases/search_location_by_city_name.dart';
+import 'home_event.dart';
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final GetCurrentWeatherUseCase _getCurrentWeatherUserCase;
   final SearchLocationsByCityNameUseCase _searchLocationsByCityNameUseCase;
+  final GetCurrentWeatherUseCase _getCurrentWeatherUserCase;
 
-
+  final f = DateFormat.yMd().add_jm();
 
   HomeBloc(
       this._getCurrentWeatherUserCase, this._searchLocationsByCityNameUseCase)
       : super(HomeInitState()) {
+
     on<OnCitySubmit>((event, emit) async {
-      emit(const HomeCitySearchState());
+      emit(LocationSearchingState());
       final result = await _searchLocationsByCityNameUseCase
           .call(SearchLocationsParams(event.cityName));
       result.fold((failure) {
         emit(HomeFailState(failure.message));
       }, (data) {
-        emit(HomeSearchCityResult(data));
+        emit(LocationSearchSuccessState(data));
       });
     });
-  }
 
-  bool isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
-    try {
-      return double.parse(s) != null;
-    } catch (e) {
-      return false;
-    }
+    on<OnCityChanged>((event, emit) async {
+      emit(WeatherLoading());
+      final result = await _getCurrentWeatherUserCase.execute(event.cityName);
+      result.fold((failure) {
+        emit(WeatherLoadFailure(failure.message));
+      }, (data) {
+        DateTime datetime = DateTime.fromMillisecondsSinceEpoch(data.dt * 1000);
+        String dateTimeStr = f.format(datetime);
+
+        emit(WeatherLoaded(data, dateTimeStr));
+      });
+    }, transformer: debounce(const Duration(milliseconds: 500)));
   }
+}
+
+
+EventTransformer<T> debounce<T>(Duration duration) {
+  return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
 }

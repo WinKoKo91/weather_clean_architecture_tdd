@@ -19,6 +19,10 @@ class WeatherWidget extends StatelessWidget {
           );
         }
 
+        if(state is WeatherLoadFailure){
+          return  Text(state.message);
+        }
+
         if (state is WeatherLoaded) {
           return Card(
             child: Padding(

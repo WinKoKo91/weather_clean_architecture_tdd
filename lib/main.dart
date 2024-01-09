@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sunshine/core/utils/app_bloc_observer.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -10,6 +11,7 @@ import 'presentation/home/pages/home_page.dart';
 void main() {
   setPathUrlStrategy();
   setupLocator();
+  Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }
 

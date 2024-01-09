@@ -16,23 +16,22 @@ class SearchBarWidget extends StatefulWidget {
 }
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
-  SearchController searchController = SearchController();
+  late SearchController searchController = SearchController();
   Debouncer debouncer = Debouncer(milliseconds: 500);
 
   @override
   void initState() {
-    searchController.addListener(() {
-      if (searchController.text.isNotEmpty) {
-        debouncer.run(() {
-          context.read<HomeBloc>().add(OnCitySubmit(searchController.text));
-        });
-      }
-    });
+    final weatherState = context.read<HomeBloc>().state;
+    if (weatherState is WeatherLoaded) {
+      searchController.text = weatherState.result.cityName;
+    }
+    searchController.addListener(searchListener);
     super.initState();
   }
 
   @override
   void dispose() {
+    searchController.removeListener(searchListener);
     searchController.dispose();
     super.dispose();
   }
@@ -40,7 +39,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   Widget build(BuildContext context) {
     return SearchAnchor(
-
       searchController: searchController,
       builder: (BuildContext context, SearchController controller) {
         return SearchBar(
@@ -83,12 +81,15 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                       itemBuilder: (context, index) {
                         final String cityName = locations[index].name!;
                         final String townshipItem = locations[index].state!;
+                        final String country = locations[index].country!;
                         return ListTile(
-                          leading: Icon(Icons.location_pin),
+                          leading: const Icon(Icons.location_pin),
                           title: Text(cityName),
-                          subtitle: Text(townshipItem),
+                          subtitle: Text("$townshipItem, $country"),
                           onTap: () {
                             controller.closeView(cityName);
+                            FocusScope.of(context).unfocus();
+
                             context
                                 .read<HomeBloc>()
                                 .add(OnCityChanged(cityName));
@@ -111,5 +112,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         ];
       },
     );
+  }
+
+  void searchListener() {
+    if (searchController.text.isNotEmpty) {
+      debouncer.run(() {
+        context.read<HomeBloc>().add(OnCitySubmit(searchController.text));
+      });
+    }
   }
 }

@@ -1,7 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:sunshine/data/repository/location_repository_impl.dart';
+import 'package:sunshine/domain/usecases/get_five_day_forecast.dart';
 import 'package:sunshine/domain/usecases/search_location_by_city_name.dart';
+import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 
 import 'data/datasource/location_remote_data_source.dart';
@@ -16,10 +18,12 @@ final locator = GetIt.instance;
 void setupLocator() {
   // bloc
   locator.registerFactory(() => HomeBloc( locator(),locator()));
+  locator.registerFactory(() => ForecastBloc( locator()));
 
-  // usecase
+  // useCase
   locator.registerLazySingleton(() => GetCurrentWeatherUseCase(locator()));
   locator.registerLazySingleton(() => SearchLocationsByCityNameUseCase(locator()));
+  locator.registerLazySingleton(() => GetFiveDayForecastUseCase(locator()));
 
   // repository
   locator.registerLazySingleton<WeatherRepository>(

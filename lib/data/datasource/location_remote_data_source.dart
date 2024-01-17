@@ -6,7 +6,6 @@ import 'package:sunshine/data/model/location_model.dart';
 
 import '../../core/constants.dart';
 import '../../core/error/exception.dart';
-import '../model/weather_model.dart';
 
 abstract class LocationRemoteDataSource {
   Future<List<LocationModel>> searchCityListByName(String cityName);

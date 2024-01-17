@@ -1,44 +1,43 @@
 {
   "coord": {
-    "lon": -74.006,
-    "lat": 40.7143
+    "lon": 96.161,
+    "lat": 16.7967
   },
   "weather": [
     {
-      "id": 800,
-      "main": "Clear",
-      "description": "clear sky",
-      "icon": "01n"
+      "id": 801,
+      "main": "Clouds",
+      "description": "few clouds",
+      "icon": "02d"
     }
   ],
   "base": "stations",
   "main": {
-    "temp": 292.87,
-    "feels_like": 292.73,
-    "temp_min": 290.47,
-    "temp_max": 294.25,
-    "pressure": 1012,
-    "humidity": 70
+    "temp": 30.03,
+    "feels_like": 32.5,
+    "temp_min": 30.03,
+    "temp_max": 30.03,
+    "pressure": 1013,
+    "humidity": 58
   },
-  "visibility": 10000,
+  "visibility": 8000,
   "wind": {
-    "speed": 6.26,
-    "deg": 319,
-    "gust": 8.94
+    "speed": 1.54,
+    "deg": 360
   },
   "clouds": {
-    "all": 0
+    "all": 18
   },
-  "dt": 1703998332,
+  "dt": 1705382769,
   "sys": {
-    "type": 2,
-    "id": 2008101,
-    "country": "US",
-    "sunrise": 1690710627,
-    "sunset": 1690762457
+    "type": 1,
+    "id": 9322,
+    "country": "MM",
+    "sunrise": 1705363655,
+    "sunset": 1705404094
   },
-  "timezone": -14400,
-  "id": 5128581,
-  "name": "New York",
+  "timezone": 23400,
+  "id": 1298824,
+  "name": "Yangon",
   "cod": 200
 }

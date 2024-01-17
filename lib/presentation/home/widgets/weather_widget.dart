@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/forecast_event.dart';
 
 import '../../../core/constants.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
 
 class WeatherWidget extends StatelessWidget {
-  WeatherWidget({super.key});
+  const WeatherWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (context, state) {
+        if (state is WeatherLoaded) {
+          context.read<ForecastBloc>().add(
+              OnGetForecastEvent(lat: state.result.lat, lon: state.result.lon));
+        }
+      },
       builder: (context, state) {
         if (state is WeatherLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
-
-        if(state is WeatherLoadFailure){
-          return  Text(state.message);
+        if (state is WeatherLoadFailure) {
+          return Text(state.message);
         }
 
         if (state is WeatherLoaded) {

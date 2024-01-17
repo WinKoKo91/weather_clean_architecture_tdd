@@ -32,6 +32,8 @@ void main() {
       pressure: 1009,
       humidity: 70,
       dt: 1703998332,
+      lat: 16.7993,
+      lon: 96.1583,
       country: 'US');
 
   const String testDatetime = '12/31/2023 11:22 AM';

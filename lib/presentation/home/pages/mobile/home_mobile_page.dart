@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/search_bar_widget.dart';
+import '../../widgets/weather_forecast_widget.dart';
 import '../../widgets/weather_widget.dart';
 
 class HomeMobilePage extends StatelessWidget {
@@ -32,13 +33,16 @@ class HomeMobilePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            WeatherWidget(),
-          ],
+      body: const Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 16.0,),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              WeatherWidget(),
+              WeatherForecastWidget(),
+            ],
+          ),
         ),
       ),
     );

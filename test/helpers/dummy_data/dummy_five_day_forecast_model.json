@@ -1,0 +1,200 @@
+{
+  "cod": "200",
+  "message": 0,
+  "cnt": 40,
+  "list": [
+    {
+      "dt": 1704866400,
+      "main": {
+        "temp": 27.57,
+        "feels_like": 27.91,
+        "temp_min": 27.57,
+        "temp_max": 30.65,
+        "pressure": 1012,
+        "sea_level": 1012,
+        "grnd_level": 1009,
+        "humidity": 49,
+        "temp_kf": -3.08
+      },
+      "weather": [
+        {
+          "id": 801,
+          "main": "Clouds",
+          "description": "few clouds",
+          "icon": "02d"
+        }
+      ],
+      "clouds": {
+        "all": 11
+      },
+      "wind": {
+        "speed": 1.97,
+        "deg": 343,
+        "gust": 1.45
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2024-01-10 06:00:00"
+    },
+    {
+      "dt": 1704877200,
+      "main": {
+        "temp": 30.0,
+        "feels_like": 29.17,
+        "temp_min": 30,
+        "temp_max": 31.98,
+        "pressure": 1010,
+        "sea_level": 1010,
+        "grnd_level": 1006,
+        "humidity": 35,
+        "temp_kf": -1.98
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01d"
+        }
+      ],
+      "clouds": {
+        "all": 3
+      },
+      "wind": {
+        "speed": 1.64,
+        "deg": 318,
+        "gust": 1.32
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2024-01-10 09:00:00"
+    },
+    {
+      "dt": 1704888000,
+      "main": {
+        "temp": 25.87,
+        "feels_like": 25.5,
+        "temp_min": 25.87,
+        "temp_max": 25.87,
+        "pressure": 1009,
+        "sea_level": 1009,
+        "grnd_level": 1007,
+        "humidity": 38,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01n"
+        }
+      ],
+      "clouds": {
+        "all": 0
+      },
+      "wind": {
+        "speed": 1.37,
+        "deg": 272,
+        "gust": 2.72
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2024-01-10 12:00:00"
+    },
+    {
+      "dt": 1704898800,
+      "main": {
+        "temp": 23.51,
+        "feels_like": 23.07,
+        "temp_min": 23.51,
+        "temp_max": 23.51,
+        "pressure": 1011,
+        "sea_level": 1011,
+        "grnd_level": 1009,
+        "humidity": 44,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01n"
+        }
+      ],
+      "clouds": {
+        "all": 0
+      },
+      "wind": {
+        "speed": 1.32,
+        "deg": 280,
+        "gust": 1.59
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2024-01-10 15:00:00"
+    },
+    {
+      "dt": 1704909600,
+      "main": {
+        "temp": 21.96,
+        "feels_like": 21.44,
+        "temp_min": 21.96,
+        "temp_max": 21.96,
+        "pressure": 1011,
+        "sea_level": 1011,
+        "grnd_level": 1009,
+        "humidity": 47,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01n"
+        }
+      ],
+      "clouds": {
+        "all": 2
+      },
+      "wind": {
+        "speed": 2.8,
+        "deg": 300,
+        "gust": 3.29
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2024-01-10 18:00:00"
+    }
+  ],
+  "city": {
+    "id": 1298824,
+    "name": "Yangon",
+    "coord": {
+      "lat": 16.7967,
+      "lon": 96.161
+    },
+    "country": "MM",
+    "population": 4477638,
+    "timezone": 23400,
+    "sunrise": 1704845199,
+    "sunset": 1704885475
+  }
+}

@@ -10,6 +10,8 @@ class WeatherModel extends WeatherEntity {
       required int pressure,
       required int humidity,
       required String country,
+      required double lon,
+      required double lat,
       required int dt})
       : super(
             cityName: cityName,
@@ -20,6 +22,8 @@ class WeatherModel extends WeatherEntity {
             temperature: temperature,
             pressure: pressure,
             humidity: humidity,
+            lon: lon,
+            lat: lat,
             dt: dt);
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
@@ -31,6 +35,8 @@ class WeatherModel extends WeatherEntity {
         pressure: json['main']['pressure'],
         humidity: json['main']['humidity'],
         country: json['sys']['country'],
+        lon: json['coord']['lon'],
+        lat: json['coord']['lat'],
         dt: json['dt'],
       );
 
@@ -47,6 +53,7 @@ class WeatherModel extends WeatherEntity {
           'pressure': pressure,
           'humidity': humidity,
         },
+        "coord": {"lon": lon, "lat": lat},
         'sys': {'country': country},
         'name': cityName,
         'dt': dt
@@ -61,6 +68,8 @@ class WeatherModel extends WeatherEntity {
         pressure: pressure,
         humidity: humidity,
         dt: dt,
+        lon: lon,
+        lat: lat,
         country: country,
       );
 }

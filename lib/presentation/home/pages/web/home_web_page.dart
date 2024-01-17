@@ -11,10 +11,9 @@ class HomeWebPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-
         leading: Row(
           children: [
-
+            const SizedBox(width: 20,),
             Image.asset(
               'assets/logo/sunshine_dart_logo.png',
               height: 40,
@@ -24,15 +23,13 @@ class HomeWebPage extends StatelessWidget {
             const SizedBox(
               width: 8,
             ),
-            const Text("Sunshine"),
+            const Text("Sunshine", style:  TextStyle(fontSize: 22),),
           ],
         ),
         leadingWidth: 200,
-
         toolbarHeight: 80,
         title: SearchBarWidget(),
       ),
-
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
@@ -41,7 +38,6 @@ class HomeWebPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-
               Flexible(
                   child: SizedBox(width: width * 0.4, child: WeatherWidget())),
             ],

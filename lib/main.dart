@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sunshine/core/utils/app_bloc_observer.dart';
+import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => locator<HomeBloc>(),
         ),
-
+        BlocProvider(
+          create: (_) => locator<ForecastBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         title: 'Sun Shine',

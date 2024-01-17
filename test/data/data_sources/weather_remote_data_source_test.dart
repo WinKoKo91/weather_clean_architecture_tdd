@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/constants.dart';
 import 'package:sunshine/core/error/exception.dart';
 import 'package:sunshine/data/datasource/weather_remote_data_source.dart';
+import 'package:sunshine/data/model/five_day_forecast_model.dart';
 import 'package:sunshine/data/model/location_model.dart';
 import 'package:sunshine/data/model/weather_model.dart';
 
@@ -24,15 +25,13 @@ void main() {
 
   const testCityName = "New York";
 
-
-
   group('get current weather', () {
     test('should return weather model when the response code is 200', () async {
       //arrange
       when(
         mockHttpClient.get(
           Uri.parse(
-            Urls.currentWeatherByName(testCityName),
+            Urls.getCurrentWeatherByName(testCityName),
           ),
         ),
       ).thenAnswer(
@@ -54,13 +53,61 @@ void main() {
       //arrange
       try {
         when(mockHttpClient
-                .get(Uri.parse(Urls.currentWeatherByName(testCityName))))
+                .get(Uri.parse(Urls.getCurrentWeatherByName(testCityName))))
             .thenAnswer((_) async => http.Response(
                   "{\"cod\":\"404\",\"message\":\"city not found\"}",
                   404,
                 ));
         //act
         await weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
+      } catch (e) {
+        // assert
+        expect(e, isA<ServerException>());
+      }
+    });
+  });
+
+  double lat = 16.7967129;
+  double lon = 96.1609916;
+
+  group('get five day forecast', () {
+    test('should return 5 day forecast model when the response code is 200',
+        () async {
+      //arrange
+      when(
+        mockHttpClient.get(
+          Uri.parse(
+            Urls.getFiveDayForecast(lat: lat, lon: lon),
+          ),
+        ),
+      ).thenAnswer(
+        (_) async => http.Response(
+            readJson('helpers/dummy_data/dummy_five_day_forecast_model.json'),
+            200),
+      );
+
+      //act
+      final result = await weatherRemoteDataSourceImpl.getFiveDayForecast(
+          lat: lat, lon: lon);
+
+      // assert
+      expect(result, isA<FiveDayForecastModel>());
+    });
+
+    test(
+        'should throw a server exception when the response code is 404 or other',
+        () async {
+      //arrange
+      try {
+        when(mockHttpClient.get(Uri.parse(
+          Urls.getFiveDayForecast(lat: lat, lon: lon),
+        ))).thenAnswer((_) async => http.Response(
+              "{\"cod\":\"404\",\"message\":\"city not found\"}",
+              404,
+            ));
+        //act
+        await weatherRemoteDataSourceImpl.getFiveDayForecast(
+            lat: lat, lon: lon);
       } catch (e) {
         // assert
         expect(e, isA<ServerException>());

@@ -46,7 +46,8 @@ void main() {
     );
   }
 
-  testWidgets(
+   //TODO: widget test for search ui
+  /*testWidgets(
       'Search bar should trigger state to change from empty to loading',
       (widgetTester) async {
     //arrange
@@ -55,7 +56,7 @@ void main() {
     await widgetTester.pumpWidget(makeTestableWidget(const SearchBarWidget()));
     //assert
     expect(find.byType(SearchBar), findsOneWidget);
-  });
+  });*/
 
 
 

@@ -33,6 +33,8 @@ void main() {
       pressure: 1009,
       humidity: 70,
       country: 'US',
+      lat: 16.7993,
+      lon: 96.1583,
       dt: 1703998332);
 
   Widget makeTestableWidget(Widget body) {

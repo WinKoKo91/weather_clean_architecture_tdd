@@ -25,6 +25,7 @@ dependencies:
   go_router: ^12.1.1
   url_strategy: ^0.2.0
   intl: ^0.19.0
+  json_annotation: ^4.8.0
 
 
 dev_dependencies:
@@ -39,6 +40,7 @@ dev_dependencies:
   mocktail: ^0.2.0
   flutter_launcher_icons: ^0.13.1
   change_app_package_name: ^1.1.0
+  json_serializable: ^6.7.0
 
 
 

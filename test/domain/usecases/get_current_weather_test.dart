@@ -25,6 +25,8 @@ void main() {
       temperature: 302.28,
       pressure: 1009,
       country: 'MM',
+      lat: 16.7993,
+      lon: 96.1583,
       humidity: 70,
   dt: 1703998332);
 

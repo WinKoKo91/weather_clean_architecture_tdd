@@ -8,15 +8,17 @@ import '../../helpers/json_reader.dart';
 
 void main() {
   const testWeatherModel = WeatherModel(
-      cityName: 'New York',
-      main: 'Clear',
-      description: 'clear sky',
-      iconCode: '01n',
-      temperature: 292.87,
-      pressure: 1012,
-      humidity: 70,
-      dt: 1703998332,
-      country: 'US');
+      cityName: 'Yangon',
+      main: 'Clouds',
+      description: 'few clouds',
+      iconCode: '02d',
+      temperature: 30.03,
+      pressure: 1013,
+      humidity: 58,
+      lat: 16.7967,
+      lon: 96.161,
+      dt: 1705382769,
+      country: 'MM');
 
   test('should be a subclass of weather entity', () async {
     //assert
@@ -42,21 +44,25 @@ void main() {
       final expectedJsonMap = {
         'weather': [
           {
-            'main': 'Clear',
-            'description': 'clear sky',
-            'icon': '01n',
+            "main": "Clouds",
+            "description": "few clouds",
+            "icon": "02d"
           }
         ],
         'main': {
-          'temp': 292.87,
-          'pressure': 1012,
-          'humidity': 70,
+          "temp": 30.03,
+          "pressure": 1013,
+          "humidity": 58
         },
         'sys':{
-          'country' :'US'
+          'country' :'MM'
         },
-        'name': 'New York',
-        'dt': 1703998332
+        "coord": {
+          "lon": 96.161,
+          "lat": 16.7967
+        },
+        'name': 'Yangon',
+        'dt': 1705382769
       };
 
       expect(result, equals(expectedJsonMap));

@@ -12,6 +12,10 @@ class WeatherModel extends WeatherEntity {
       required String country,
       required double lon,
       required double lat,
+      required double feelsLike,
+      required int visibility,
+      required int sunrise,
+      required int sunset,
       required int dt})
       : super(
             cityName: cityName,
@@ -24,6 +28,10 @@ class WeatherModel extends WeatherEntity {
             humidity: humidity,
             lon: lon,
             lat: lat,
+            sunrise: sunrise,
+            sunset: sunset,
+            visibility: visibility,
+            feelsLike: feelsLike,
             dt: dt);
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
@@ -34,9 +42,13 @@ class WeatherModel extends WeatherEntity {
         temperature: json['main']['temp'],
         pressure: json['main']['pressure'],
         humidity: json['main']['humidity'],
+        feelsLike: json['main']['feels_like'],
+        visibility: json['visibility'],
         country: json['sys']['country'],
         lon: json['coord']['lon'],
         lat: json['coord']['lat'],
+        sunset: json['sys']['sunset'],
+        sunrise: json['sys']['sunrise'],
         dt: json['dt'],
       );
 
@@ -52,24 +64,29 @@ class WeatherModel extends WeatherEntity {
           'temp': temperature,
           'pressure': pressure,
           'humidity': humidity,
+          "feels_like": feelsLike,
         },
+        "visibility": visibility,
         "coord": {"lon": lon, "lat": lat},
-        'sys': {'country': country},
+        'sys': {'country': country, "sunrise": sunrise, "sunset": sunset},
         'name': cityName,
         'dt': dt
       };
 
   WeatherEntity toEntity() => WeatherEntity(
-        cityName: cityName,
-        main: main,
-        description: description,
-        iconCode: iconCode,
-        temperature: temperature,
-        pressure: pressure,
-        humidity: humidity,
-        dt: dt,
-        lon: lon,
-        lat: lat,
-        country: country,
-      );
+      cityName: cityName,
+      main: main,
+      description: description,
+      iconCode: iconCode,
+      temperature: temperature,
+      pressure: pressure,
+      humidity: humidity,
+      dt: dt,
+      lon: lon,
+      lat: lat,
+      country: country,
+      sunrise: sunrise,
+      sunset: sunset,
+      feelsLike: feelsLike,
+      visibility: visibility);
 }

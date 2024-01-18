@@ -2,7 +2,9 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:sunshine/data/repository/location_repository_impl.dart';
 import 'package:sunshine/domain/usecases/get_five_day_forecast.dart';
+import 'package:sunshine/domain/usecases/get_today_air_pollution.dart';
 import 'package:sunshine/domain/usecases/search_location_by_city_name.dart';
+import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 
@@ -19,11 +21,13 @@ void setupLocator() {
   // bloc
   locator.registerFactory(() => HomeBloc( locator(),locator()));
   locator.registerFactory(() => ForecastBloc( locator()));
+  locator.registerFactory(() => AirPollutionBloc( locator()));
 
   // useCase
   locator.registerLazySingleton(() => GetCurrentWeatherUseCase(locator()));
   locator.registerLazySingleton(() => SearchLocationsByCityNameUseCase(locator()));
   locator.registerLazySingleton(() => GetFiveDayForecastUseCase(locator()));
+  locator.registerLazySingleton(() => GetTodayAirPollutionUseCase(locator()));
 
   // repository
   locator.registerLazySingleton<WeatherRepository>(

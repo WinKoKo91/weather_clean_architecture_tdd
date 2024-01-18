@@ -34,6 +34,9 @@ void main() {
       dt: 1703998332,
       lat: 16.7993,
       lon: 96.1583,
+      sunset: 1705404094,
+      sunrise: 1705363655,      feelsLike: 32.5,
+      visibility: 8000,
       country: 'US');
 
   const String testDatetime = '12/31/2023 11:22 AM';
@@ -54,7 +57,7 @@ void main() {
       act: (bloc) => bloc.add(const OnCityChanged(testCityName)),
       wait: const Duration(milliseconds: 500),
       expect: () =>
-          [WeatherLoading(), const WeatherLoaded(testWeather, testDatetime)]);
+          [WeatherLoading(), const WeatherLoaded(testWeather, testDatetime,'6:37 AM', '5:51 PM')]);
 
   blocTest<HomeBloc, HomeState>(
       'should emit [WeatherLoading, WeatherLoadFailure] when get data is unsuccessful',

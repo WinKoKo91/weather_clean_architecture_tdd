@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/air_pollution_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
 
 import '../../../core/utils/debouncer.dart';
+import '../../../domain/entities/location.dart';
+import '../bloc/forecast_bloc.dart';
+import '../bloc/forecast_event.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 
@@ -43,6 +48,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       builder: (BuildContext context, SearchController controller) {
         return SearchBar(
           key: const Key('search_bar_widget'),
+          hintText:  'Search city...',
           controller: controller,
           padding: const MaterialStatePropertyAll<EdgeInsets>(
               EdgeInsets.only(left: 16.0, right: 8.0)),
@@ -79,20 +85,26 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                       shrinkWrap: true,
                       itemCount: locations.length,
                       itemBuilder: (context, index) {
-                        final String cityName = locations[index].name!;
-                        final String townshipItem = locations[index].state!;
-                        final String country = locations[index].country!;
+                        final LocationEntity location = locations[index];
                         return ListTile(
                           leading: const Icon(Icons.location_pin),
-                          title: Text(cityName),
-                          subtitle: Text("$townshipItem, $country"),
+                          title: Text(location.name!),
+                          subtitle:
+                              Text("${location.state}, ${location.country}"),
                           onTap: () {
-                            controller.closeView(cityName);
+                            controller.closeView(location.name!);
                             FocusScope.of(context).unfocus();
 
                             context
                                 .read<HomeBloc>()
-                                .add(OnCityChanged(cityName));
+                                .add(OnCityChanged(location.name!));
+
+                            context.read<ForecastBloc>().add(OnGetForecastEvent(
+                                lat: location.lat!, lon: location.lon!));
+
+                            context.read<AirPollutionBloc>().add(
+                                OnGetAirPollutionEvent(
+                                    lat: location.lat!, lon: location.lon!));
                           },
                         );
                       });

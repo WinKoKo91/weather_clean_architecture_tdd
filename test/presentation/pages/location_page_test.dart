@@ -9,16 +9,10 @@ import 'package:mocktail/mocktail.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_event.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
-
+import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
-import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
-import 'package:sunshine/presentation/home/pages/home_page.dart';
 import 'package:sunshine/presentation/home/pages/mobile/home_mobile_page.dart';
-import 'package:sunshine/presentation/home/widgets/search_bar_widget.dart';
-import 'package:sunshine/presentation/widgets/responsive.dart';
-
-import '../../helpers/test_helper.mocks.dart';
 
 class MockHomeBloc extends MockBloc<HomeEvent, HomeState> implements HomeBloc {}
 

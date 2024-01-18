@@ -12,7 +12,6 @@ import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
-import 'package:sunshine/presentation/home/pages/home_page.dart';
 import 'package:sunshine/presentation/home/pages/mobile/home_mobile_page.dart';
 
 import 'forecast_page_test.dart';
@@ -40,6 +39,9 @@ void main() {
       humidity: 70,
       country: 'US',
       lat: 16.7993,
+      sunset: 1705404094,
+      sunrise: 1705363655,      feelsLike: 32.5,
+      visibility: 8000,
       lon: 96.1583,
       dt: 1703998332);
 
@@ -87,8 +89,8 @@ void main() {
     'should show widget contain weather data when state is weather loaded',
     (widgetTester) async {
       //arrange
-      when(() => mockHomeBloc.state)
-          .thenReturn(const WeatherLoaded(testWeather, '12/31/2023 11:22 AM'));
+      when(() => mockHomeBloc.state).thenReturn(const WeatherLoaded(
+          testWeather, '12/31/2023 11:22 AM', '6:37 AM', '5:51 PM'));
       when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
 
       //act

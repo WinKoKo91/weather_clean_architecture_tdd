@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sunshine/domain/entities/forecast_entity.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/forecast_event.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 
 import '../../../core/constants.dart';

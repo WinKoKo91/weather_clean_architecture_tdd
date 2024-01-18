@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:sunshine/domain/entities/air_pollution_entity.dart';
 
 class AirPollutionResponseModel extends AirPollutionResponseEntity {

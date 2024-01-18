@@ -18,6 +18,10 @@ void main() {
       lat: 16.7967,
       lon: 96.161,
       dt: 1705382769,
+      sunset: 1705404094,
+      sunrise: 1705363655,
+      feelsLike: 32.5,
+      visibility: 8000,
       country: 'MM');
 
   test('should be a subclass of weather entity', () async {
@@ -43,24 +47,11 @@ void main() {
       // assert
       final expectedJsonMap = {
         'weather': [
-          {
-            "main": "Clouds",
-            "description": "few clouds",
-            "icon": "02d"
-          }
+          {"main": "Clouds", "description": "few clouds", "icon": "02d"}
         ],
-        'main': {
-          "temp": 30.03,
-          "pressure": 1013,
-          "humidity": 58
-        },
-        'sys':{
-          'country' :'MM'
-        },
-        "coord": {
-          "lon": 96.161,
-          "lat": 16.7967
-        },
+        'main': {"temp": 30.03, "pressure": 1013, "humidity": 58},
+        'sys': {'country': 'MM'},
+        "coord": {"lon": 96.161, "lat": 16.7967},
         'name': 'Yangon',
         'dt': 1705382769
       };

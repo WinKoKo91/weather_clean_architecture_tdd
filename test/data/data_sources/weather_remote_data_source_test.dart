@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/constants.dart';
 import 'package:sunshine/core/error/exception.dart';
 import 'package:sunshine/data/datasource/weather_remote_data_source.dart';
-import 'package:sunshine/data/model/five_day_forecast_model.dart';
-import 'package:sunshine/data/model/location_model.dart';
+import 'package:sunshine/data/model/air_pollution_model.dart';
+import 'package:sunshine/data/model/forecast_model.dart';
 import 'package:sunshine/data/model/weather_model.dart';
 
 import '../../helpers/json_reader.dart';
@@ -91,7 +89,7 @@ void main() {
           lat: lat, lon: lon);
 
       // assert
-      expect(result, isA<FiveDayForecastModel>());
+      expect(result, isA<ForecastResponseModel>());
     });
 
     test(
@@ -113,5 +111,51 @@ void main() {
         expect(e, isA<ServerException>());
       }
     });
+  });
+
+
+  group('get air pollution', () {
+    test('should return air pollution model when the response code is 200',
+            () async {
+          //arrange
+          when(
+            mockHttpClient.get(
+              Uri.parse(
+                Urls.getAirPollution(lat: lat, lon: lon),
+              ),
+            ),
+          ).thenAnswer(
+                (_) async => http.Response(
+                readJson('helpers/dummy_data/dummy_air_pollution_model.json'),
+                200),
+          );
+
+          //act
+          final result = await weatherRemoteDataSourceImpl.getAirPollution(
+              lat: lat, lon: lon);
+
+          // assert
+          expect(result, isA<AirPollutionResponseModel>());
+        });
+
+    test(
+        'should throw a server exception when the response code is 404 or other',
+            () async {
+          //arrange
+          try {
+            when(mockHttpClient.get(Uri.parse(
+              Urls.getFiveDayForecast(lat: lat, lon: lon),
+            ))).thenAnswer((_) async => http.Response(
+              "{\"cod\":\"404\",\"message\":\"city not found\"}",
+              404,
+            ));
+            //act
+            await weatherRemoteDataSourceImpl.getFiveDayForecast(
+                lat: lat, lon: lon);
+          } catch (e) {
+            // assert
+            expect(e, isA<ServerException>());
+          }
+        });
   });
 }

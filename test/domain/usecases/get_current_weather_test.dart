@@ -28,6 +28,10 @@ void main() {
       lat: 16.7993,
       lon: 96.1583,
       humidity: 70,
+      sunset: 1705404094,
+      sunrise: 1705363655,
+      feelsLike: 32.5,
+      visibility: 8000,
   dt: 1703998332);
 
   test('should get current weather detail from the repository', () async {

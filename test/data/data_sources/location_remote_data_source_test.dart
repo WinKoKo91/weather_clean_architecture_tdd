@@ -6,9 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/constants.dart';
 import 'package:sunshine/core/error/exception.dart';
 import 'package:sunshine/data/datasource/location_remote_data_source.dart';
-import 'package:sunshine/data/datasource/weather_remote_data_source.dart';
 import 'package:sunshine/data/model/location_model.dart';
-import 'package:sunshine/data/model/weather_model.dart';
 
 import '../../helpers/json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';

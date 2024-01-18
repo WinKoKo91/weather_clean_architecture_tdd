@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:sunshine/domain/entities/five_day_forecast_entity.dart';
 
 import '../../../domain/entities/forecast_entity.dart';
 

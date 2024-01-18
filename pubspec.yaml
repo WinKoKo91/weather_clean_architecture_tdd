@@ -26,6 +26,7 @@ dependencies:
   url_strategy: ^0.2.0
   intl: ^0.19.0
   json_annotation: ^4.8.0
+  flutter_svg: ^2.0.9
 
 
 dev_dependencies:
@@ -57,6 +58,7 @@ flutter:
     - assets/weather_logo.png
     - assets/sunshine.png
     - assets/logo/
+    - assets/icon/
 
  
  

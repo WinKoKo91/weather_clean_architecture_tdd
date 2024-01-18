@@ -37,7 +37,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         DateTime datetime = DateTime.fromMillisecondsSinceEpoch(data.dt * 1000);
         String dateTimeStr = f.format(datetime);
 
-        emit(WeatherLoaded(data, dateTimeStr));
+        DateTime sunsetDateTime = DateTime.fromMillisecondsSinceEpoch(data.sunset * 1000);
+        DateTime sunriseDateTime = DateTime.fromMillisecondsSinceEpoch(data.sunrise * 1000);
+        String sunsetStr =  DateFormat.jm().format(sunsetDateTime);
+        String sunriseStr =  DateFormat.jm().format(sunriseDateTime);
+
+        emit(WeatherLoaded(data, dateTimeStr, sunriseStr, sunsetStr));
       });
     }, transformer: debounce(const Duration(milliseconds: 500)));
   }

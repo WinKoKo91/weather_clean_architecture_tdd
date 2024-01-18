@@ -1,10 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../../core/utils/datetime_util.dart';
-import '../../../data/model/forecast_model.dart';
 import '../../../domain/entities/forecast_entity.dart';
 import '../../../domain/usecases/get_five_day_forecast.dart';
 import 'forecast_event.dart';
@@ -56,8 +52,8 @@ class ForecastBloc extends Bloc<ForecastEvent, ForecastState> {
 
           emit(ForecastLoadedState(list: forecastList.take(5).toList(),code: data.code));
         });
-      } catch (e, stucktrack) {
-        print(stucktrack);
+      } catch (e, stacktrace) {
+        print(stacktrace);
         emit(ForecastFailState(e.toString()));
       }
     });

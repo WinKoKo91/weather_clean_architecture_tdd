@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_event.dart';
 
@@ -16,8 +15,7 @@ class WeatherWidget extends StatelessWidget {
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
         if (state is WeatherLoaded) {
-          context.read<ForecastBloc>().add(
-              OnGetForecastEvent(lat: state.result.lat, lon: state.result.lon));
+
         }
       },
       builder: (context, state) {

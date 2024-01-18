@@ -1,13 +1,9 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sunshine/core/usecase/usecase.dart';
 import 'package:sunshine/domain/entities/location.dart';
 
-import '../../core/error/failure.dart';
 import '../../core/utils/typedef.dart';
-import '../entities/weather.dart';
 import '../repositories/location_repository.dart';
-import '../repositories/weather_repository.dart';
 
 class SearchLocationsByCityNameUseCase
     extends UseCaseWithParams<List<LocationEntity>, SearchLocationsParams> {

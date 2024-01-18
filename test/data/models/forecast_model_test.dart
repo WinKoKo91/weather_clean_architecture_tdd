@@ -16,7 +16,7 @@ void main() {
     ForecastModel(iconCode: "01n", dt: 1704909600, temperature: 21.96)
   ]);
 
-  test('should be a subclass of location entity', () async {
+  test('should be a subclass of forecast entity', () async {
     expect(testFiveDayForecastModel, isA<FiveDayForecastModel>());
   });
 

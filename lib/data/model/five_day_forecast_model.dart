@@ -15,7 +15,20 @@ class FiveDayForecastModel extends FiveDayForecastEntity {
               .toList(),
           code: json['cod']);
 
-  Map<String, dynamic> toJson() => <String, dynamic>{'cod': code, 'list': list};
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'cod': code,
+        'list': list
+            .map(
+              (e) => {
+                'weather': [
+                  {'icon': e.iconCode}
+                ],
+                'main': {'temp': e.temperature},
+                'dt': e.dt,
+              },
+            )
+            .toList()
+      };
 
   FiveDayForecastEntity toEntity() {
     List<ForecastEntity> entities = list.map((e) => e).toList();

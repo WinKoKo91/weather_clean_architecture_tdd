@@ -16,4 +16,5 @@ class ForecastEntity extends Equatable {
 
   @override
   List<Object?> get props => [iconCode, dt, temperature, date, day];
+
 }

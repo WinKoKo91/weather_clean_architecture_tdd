@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/search_bar_widget.dart';
+import '../../widgets/weather_forecast_widget.dart';
 import '../../widgets/weather_widget.dart';
 
 class HomeWebPage extends StatelessWidget {
@@ -40,6 +41,7 @@ class HomeWebPage extends StatelessWidget {
             children: [
               Flexible(
                   child: SizedBox(width: width * 0.4, child: WeatherWidget())),
+              const WeatherForecastWidget(),
             ],
           ),
         ),

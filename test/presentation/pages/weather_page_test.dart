@@ -7,20 +7,26 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sunshine/domain/entities/weather.dart';
+import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
 import 'package:sunshine/presentation/home/pages/home_page.dart';
+import 'package:sunshine/presentation/home/pages/mobile/home_mobile_page.dart';
 
-class MockHomeBloc extends MockBloc<HomeEvent, HomeState>
-    implements HomeBloc {}
+import 'forecast_page_test.dart';
+
+class MockHomeBloc extends MockBloc<HomeEvent, HomeState> implements HomeBloc {}
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late MockHomeBloc mockHomeBloc;
+  late MockForecastBloc mockForecastBloc;
 
   setUp(() {
     mockHomeBloc = MockHomeBloc();
+    mockForecastBloc = MockForecastBloc();
     HttpOverrides.global = null;
   });
 
@@ -38,19 +44,27 @@ void main() {
       dt: 1703998332);
 
   Widget makeTestableWidget(Widget body) {
-    return BlocProvider<HomeBloc>(
-      create: (context) => mockHomeBloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeBloc>(
+          create: (context) => mockHomeBloc,
+        ),
+        BlocProvider<ForecastBloc>(
+          create: (context) => mockForecastBloc,
+        ),
+      ],
       child: MaterialApp(
         home: body,
       ),
     );
   }
 
-  testWidgets("text field should trigger state to change from empty to loading",
+  testWidgets("App Bar should trigger state to change from empty to loading",
       (widgetTester) async {
     when(() => mockHomeBloc.state).thenReturn(HomeInitState());
+    when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
 
-    await widgetTester.pumpWidget(makeTestableWidget(HomePage()));
+    await widgetTester.pumpWidget(makeTestableWidget(const HomeMobilePage()));
 
     expect(find.byType(AppBar), findsOneWidget);
   });
@@ -60,9 +74,9 @@ void main() {
     (widgetTester) async {
       //arrange
       when(() => mockHomeBloc.state).thenReturn(WeatherLoading());
-
+      when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(HomePage()));
+      await widgetTester.pumpWidget(makeTestableWidget(const HomeMobilePage()));
 
       //assert
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -74,10 +88,11 @@ void main() {
     (widgetTester) async {
       //arrange
       when(() => mockHomeBloc.state)
-          .thenReturn(const WeatherLoaded(testWeather,'12/31/2023 11:22 AM'));
+          .thenReturn(const WeatherLoaded(testWeather, '12/31/2023 11:22 AM'));
+      when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
 
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(HomePage()));
+      await widgetTester.pumpWidget(makeTestableWidget(const HomeMobilePage()));
       await widgetTester.pumpAndSettle(const Duration(milliseconds: 300));
       //assert
       expect(find.byKey(const Key('weather_data')), findsOneWidget);

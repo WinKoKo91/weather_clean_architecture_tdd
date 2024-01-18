@@ -18,9 +18,11 @@ void main() {
 
   setUp(() {
     mockGetCurrentWeatherUseCase = MockGetCurrentWeatherUseCase();
-    mockSearchLocationsByCityNameUseCase = MockSearchLocationsByCityNameUseCase();
+    mockSearchLocationsByCityNameUseCase =
+        MockSearchLocationsByCityNameUseCase();
 
-    homeBloc = HomeBloc(mockGetCurrentWeatherUseCase,mockSearchLocationsByCityNameUseCase);
+    homeBloc = HomeBloc(
+        mockGetCurrentWeatherUseCase, mockSearchLocationsByCityNameUseCase);
   });
 
   const testWeather = WeatherEntity(
@@ -35,7 +37,8 @@ void main() {
       lat: 16.7993,
       lon: 96.1583,
       sunset: 1705404094,
-      sunrise: 1705363655,      feelsLike: 32.5,
+      sunrise: 1705363655,
+      feelsLike: 32.5,
       visibility: 8000,
       country: 'US');
 
@@ -56,8 +59,16 @@ void main() {
       },
       act: (bloc) => bloc.add(const OnCityChanged(testCityName)),
       wait: const Duration(milliseconds: 500),
-      expect: () =>
-          [WeatherLoading(), const WeatherLoaded(testWeather, testDatetime,'6:37 AM', '5:51 PM')]);
+      expect: () => [
+            WeatherLoading(),
+            const WeatherLoaded(
+              data: testWeather,
+              dateTime: testDatetime,
+              sunrise: '6:37 AM',
+              sunset: '5:51 PM',
+              visibility: '8.0',
+            )
+          ]);
 
   blocTest<HomeBloc, HomeState>(
       'should emit [WeatherLoading, WeatherLoadFailure] when get data is unsuccessful',

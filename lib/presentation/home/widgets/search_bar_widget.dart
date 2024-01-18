@@ -28,7 +28,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   void initState() {
     final weatherState = context.read<HomeBloc>().state;
     if (weatherState is WeatherLoaded) {
-      searchController.text = weatherState.result.cityName;
+      searchController.text = weatherState.data.cityName;
     }
     searchController.addListener(searchListener);
     super.initState();

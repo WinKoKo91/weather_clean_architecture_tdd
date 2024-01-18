@@ -16,7 +16,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(
       this._getCurrentWeatherUserCase, this._searchLocationsByCityNameUseCase)
       : super(HomeInitState()) {
-
     on<OnCitySubmit>((event, emit) async {
       emit(LocationSearchingState());
       final result = await _searchLocationsByCityNameUseCase
@@ -37,17 +36,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         DateTime datetime = DateTime.fromMillisecondsSinceEpoch(data.dt * 1000);
         String dateTimeStr = f.format(datetime);
 
-        DateTime sunsetDateTime = DateTime.fromMillisecondsSinceEpoch(data.sunset * 1000);
-        DateTime sunriseDateTime = DateTime.fromMillisecondsSinceEpoch(data.sunrise * 1000);
-        String sunsetStr =  DateFormat.jm().format(sunsetDateTime);
-        String sunriseStr =  DateFormat.jm().format(sunriseDateTime);
-
-        emit(WeatherLoaded(data, dateTimeStr, sunriseStr, sunsetStr));
+        DateTime sunsetDateTime =
+            DateTime.fromMillisecondsSinceEpoch(data.sunset * 1000);
+        DateTime sunriseDateTime =
+            DateTime.fromMillisecondsSinceEpoch(data.sunrise * 1000);
+        String sunsetStr = DateFormat.jm().format(sunsetDateTime);
+        String sunriseStr = DateFormat.jm().format(sunriseDateTime);
+        String visibility = (data.visibility / 1000).toString();
+        emit(WeatherLoaded(
+            data: data,
+            dateTime: dateTimeStr,
+            sunrise: sunriseStr,
+            sunset: sunsetStr,
+            visibility: visibility));
       });
     }, transformer: debounce(const Duration(milliseconds: 500)));
   }
 }
-
 
 EventTransformer<T> debounce<T>(Duration duration) {
   return (events, mapper) => events.debounceTime(duration).flatMap(mapper);

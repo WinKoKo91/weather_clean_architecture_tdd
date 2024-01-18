@@ -45,21 +45,21 @@ class WeatherWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${state.result.temperature}°C",
+                        "${state.data.temperature}°C",
                         style: const TextStyle(
                             fontSize: 40.0, fontWeight: FontWeight.bold),
                       ),
                       Image(
                         image: NetworkImage(
                           Urls.weatherIcon(
-                            state.result.iconCode,
+                            state.data.iconCode,
                           ),
                         ),
                       ),
                     ],
                   ),
                   Text(
-                    '${state.result.main} | ${state.result.description}',
+                    '${state.data.main} | ${state.data.description}',
                     style: const TextStyle(
                         fontSize: 15.0, fontWeight: FontWeight.w500),
                   ),
@@ -90,7 +90,7 @@ class WeatherWidget extends StatelessWidget {
                       const SizedBox(
                         width: 8,
                       ),
-                      Text("${state.result.cityName}, ${state.result.country}"),
+                      Text("${state.data.cityName}, ${state.data.country}"),
                     ],
                   ),
                 ],

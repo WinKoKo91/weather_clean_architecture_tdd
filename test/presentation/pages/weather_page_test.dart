@@ -7,6 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sunshine/domain/entities/weather.dart';
+import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/air_pollution_event.dart';
+import 'package:sunshine/presentation/home/bloc/air_pollution_state.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
@@ -17,15 +20,18 @@ import 'package:sunshine/presentation/home/pages/mobile/home_mobile_page.dart';
 import 'forecast_page_test.dart';
 
 class MockHomeBloc extends MockBloc<HomeEvent, HomeState> implements HomeBloc {}
+class MockAirPollutionBloc extends MockBloc<AirPollutionEvent, AirPollutionState> implements AirPollutionBloc {}
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late MockHomeBloc mockHomeBloc;
   late MockForecastBloc mockForecastBloc;
+  late MockAirPollutionBloc mockAirPollutionBloc;
 
   setUp(() {
     mockHomeBloc = MockHomeBloc();
     mockForecastBloc = MockForecastBloc();
+    mockAirPollutionBloc = MockAirPollutionBloc();
     HttpOverrides.global = null;
   });
 
@@ -40,7 +46,8 @@ void main() {
       country: 'US',
       lat: 16.7993,
       sunset: 1705404094,
-      sunrise: 1705363655,      feelsLike: 32.5,
+      sunrise: 1705363655,
+      feelsLike: 32.5,
       visibility: 8000,
       lon: 96.1583,
       dt: 1703998332);
@@ -54,6 +61,10 @@ void main() {
         BlocProvider<ForecastBloc>(
           create: (context) => mockForecastBloc,
         ),
+        BlocProvider<AirPollutionBloc>(
+          create: (context) => mockAirPollutionBloc,
+        ),
+
       ],
       child: MaterialApp(
         home: body,
@@ -90,8 +101,14 @@ void main() {
     (widgetTester) async {
       //arrange
       when(() => mockHomeBloc.state).thenReturn(const WeatherLoaded(
-          testWeather, '12/31/2023 11:22 AM', '6:37 AM', '5:51 PM'));
+        data: testWeather,
+        dateTime: '12/31/2023 11:22 AM',
+        sunrise: '6:37 AM',
+        sunset: '5:51 PM',
+        visibility: '8.0',
+      ));
       when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
+      when(() => mockAirPollutionBloc.state).thenReturn(AirPollutionInitState());
 
       //act
       await widgetTester.pumpWidget(makeTestableWidget(const HomeMobilePage()));

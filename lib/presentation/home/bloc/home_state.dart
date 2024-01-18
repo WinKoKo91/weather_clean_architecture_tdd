@@ -33,15 +33,17 @@ class LocationSearchSuccessState extends HomeState {
 class LocationSearchingState extends HomeState {}
 
 class WeatherLoaded extends HomeState {
-  final WeatherEntity result;
+  final WeatherEntity data;
   final String dateTime;
   final String sunset;
   final String sunrise;
+  final String visibility;
 
-  const WeatherLoaded(this.result, this.dateTime, this.sunrise, this.sunset);
+  const WeatherLoaded(
+      {required this.data,required this.dateTime,required this.sunrise,required this.sunset,required this.visibility});
 
   @override
-  List<Object?> get props => [result, dateTime, sunrise, sunset];
+  List<Object?> get props => [data, dateTime, sunrise, sunset,visibility];
 }
 
 class WeatherLoadFailure extends HomeState {

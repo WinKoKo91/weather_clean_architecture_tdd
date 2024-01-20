@@ -23,7 +23,7 @@ class AirQualityTypeWidget extends StatelessWidget {
         ),
         Text(
           type,
-          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w200),
         )
       ],
     );

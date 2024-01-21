@@ -14,7 +14,7 @@ class TodayHighlightsWidget extends StatelessWidget {
       if (state is WeatherLoaded) {
         return Container(
           key: const Key('today_highlights_data'),
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(20.0),

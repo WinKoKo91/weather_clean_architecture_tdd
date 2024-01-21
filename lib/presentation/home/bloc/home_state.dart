@@ -21,16 +21,7 @@ class HomeFailState extends HomeState {
   List<Object?> get props => [errorMessage];
 }
 
-class LocationSearchSuccessState extends HomeState {
-  final List<LocationEntity> locations;
 
-  const LocationSearchSuccessState(this.locations);
-
-  @override
-  List<Object?> get props => [locations];
-}
-
-class LocationSearchingState extends HomeState {}
 
 class WeatherLoaded extends HomeState {
   final WeatherEntity data;

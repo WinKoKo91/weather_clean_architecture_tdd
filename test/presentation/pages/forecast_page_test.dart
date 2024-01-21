@@ -26,14 +26,38 @@ void main() {
   });
 
   ForecastResponseEntity testFiveDayForecastEntity =
-  ForecastResponseEntity(code: "200", list: [
-    ForecastModel(iconCode: "02d", dt: 1704866400, temperature: 27.57),
-    ForecastModel(iconCode: "01d", dt: 1704967200, temperature: 30.0),
-    ForecastModel(iconCode: "01n", dt: 1705053600, temperature: 25.87),
-    ForecastModel(iconCode: "01n", dt: 1705140000, temperature: 23.51),
-    ForecastModel(iconCode: "01n", dt: 1705226400, temperature: 21.96)
+      ForecastResponseEntity(code: "200", list: [
+    ForecastModel(
+        iconCode: "02d",
+        dt: 1704866400,
+        temperature: 27.57,
+        windDegree: 343,
+        windSpeed: 1.97),
+    ForecastModel(
+        iconCode: "01d",
+        dt: 1704963600,
+        temperature: 30.0,
+        windDegree: 318,
+        windSpeed: 1.64),
+    ForecastModel(
+        iconCode: "01n",
+        dt: 1705050000,
+        temperature: 25.87,
+        windDegree: 272,
+        windSpeed: 1.37),
+    ForecastModel(
+        iconCode: "01n",
+        dt: 1705136400,
+        temperature: 23.51,
+        windDegree: 280,
+        windSpeed: 1.32),
+    ForecastModel(
+        iconCode: "01n",
+        dt: 1705222800,
+        temperature: 21.96,
+        windDegree: 300,
+        windSpeed: 2.8)
   ]);
-
 
   Widget makeTestableWidget(Widget body) {
     return BlocProvider<ForecastBloc>(
@@ -48,7 +72,8 @@ void main() {
       (widgetTester) async {
     when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
 
-    await widgetTester.pumpWidget(makeTestableWidget(const WeatherForecastWidget()));
+    await widgetTester
+        .pumpWidget(makeTestableWidget(const WeatherForecastWidget()));
 
     expect(find.byType(Container), findsOneWidget);
   });
@@ -57,10 +82,12 @@ void main() {
     'should show progress indicator when state is loading',
     (widgetTester) async {
       //arrange
-      when(() => mockForecastBloc.state).thenReturn(const ForecastLoadingState());
+      when(() => mockForecastBloc.state)
+          .thenReturn(const ForecastLoadingState());
 
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(const WeatherForecastWidget()));
+      await widgetTester
+          .pumpWidget(makeTestableWidget(const WeatherForecastWidget()));
 
       //assert
       expect(find.byType(Container), findsOneWidget);
@@ -71,11 +98,14 @@ void main() {
     'should show widget contain forecast data when state is forecast loaded',
     (widgetTester) async {
       //arrange
-      when(() => mockForecastBloc.state)
-          .thenReturn( ForecastLoadedState(list: testFiveDayForecastEntity.list ,code: testFiveDayForecastEntity.code));
+      when(() => mockForecastBloc.state).thenReturn(ForecastLoadedState(
+          dailyList: testFiveDayForecastEntity.list,
+          hourlyList: testFiveDayForecastEntity.list,
+          code: testFiveDayForecastEntity.code));
 
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(const WeatherForecastWidget()));
+      await widgetTester
+          .pumpWidget(makeTestableWidget(const WeatherForecastWidget()));
       await widgetTester.pumpAndSettle(const Duration(milliseconds: 300));
       //assert
       expect(find.byKey(const Key('forecast_data')), findsOneWidget);

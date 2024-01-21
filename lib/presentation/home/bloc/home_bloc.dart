@@ -8,25 +8,13 @@ import 'home_event.dart';
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final SearchLocationsByCityNameUseCase _searchLocationsByCityNameUseCase;
   final GetCurrentWeatherUseCase _getCurrentWeatherUserCase;
 
   final f = DateFormat.yMd().add_jm();
 
   HomeBloc(
-      this._getCurrentWeatherUserCase, this._searchLocationsByCityNameUseCase)
-      : super(HomeInitState()) {
-    on<OnCitySubmit>((event, emit) async {
-      emit(LocationSearchingState());
-      final result = await _searchLocationsByCityNameUseCase
-          .call(SearchLocationsParams(event.cityName));
-      result.fold((failure) {
-        emit(HomeFailState(failure.message));
-      }, (data) {
-        emit(LocationSearchSuccessState(data));
-      });
-    });
-
+    this._getCurrentWeatherUserCase,
+  ) : super(HomeInitState()) {
     on<OnCityChanged>((event, emit) async {
       emit(WeatherLoading());
       final result = await _getCurrentWeatherUserCase.execute(event.cityName);

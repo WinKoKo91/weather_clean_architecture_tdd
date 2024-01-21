@@ -7,6 +7,7 @@ import 'package:sunshine/domain/usecases/search_location_by_city_name.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
 
 import 'data/datasource/location_remote_data_source.dart';
 import 'data/datasource/weather_remote_data_source.dart';
@@ -19,9 +20,10 @@ final locator = GetIt.instance;
 
 void setupLocator() {
   // bloc
-  locator.registerFactory(() => HomeBloc( locator(),locator()));
+  locator.registerFactory(() => HomeBloc( locator()));
   locator.registerFactory(() => ForecastBloc( locator()));
   locator.registerFactory(() => AirPollutionBloc( locator()));
+  locator.registerFactory(() => LocationBloc( locator()));
 
   // useCase
   locator.registerLazySingleton(() => GetCurrentWeatherUseCase(locator()));

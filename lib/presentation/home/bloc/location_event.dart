@@ -1,20 +1,19 @@
 
 import 'package:equatable/equatable.dart';
 
-abstract class HomeEvent extends Equatable {
-  const HomeEvent();
+abstract class LocationEvent extends Equatable {
+  const LocationEvent();
 
   @override
   List<Object?> get props => [];
 }
 
-
-
-class OnCityChanged extends HomeEvent {
+class OnCitySubmit extends LocationEvent {
   final String cityName;
 
-  const OnCityChanged(this.cityName);
+  const OnCitySubmit(this.cityName);
 
   @override
   List<Object?> get props => [cityName];
 }
+

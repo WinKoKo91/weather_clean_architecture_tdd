@@ -124,20 +124,70 @@ void main() {
 
   ForecastResponseModel testFiveDayForecastModel =
       ForecastResponseModel(code: "200", list: [
-    ForecastModel(iconCode: "02d", dt: 1704866400, temperature: 27.57),
-    ForecastModel(iconCode: "01d", dt: 1704877200, temperature: 30.0),
-    ForecastModel(iconCode: "01n", dt: 1704888000, temperature: 25.87),
-    ForecastModel(iconCode: "01n", dt: 1704898800, temperature: 23.51),
-    ForecastModel(iconCode: "01n", dt: 1704909600, temperature: 21.96)
+        ForecastModel(
+            iconCode: "02d",
+            dt: 1704866400,
+            temperature: 27.57,
+            windDegree: 343,
+            windSpeed: 1.97),
+        ForecastModel(
+            iconCode: "01d",
+            dt: 1704963600,
+            temperature: 30.0,
+            windDegree: 318,
+            windSpeed: 1.64),
+        ForecastModel(
+            iconCode: "01n",
+            dt: 1705050000,
+            temperature: 25.87,
+            windDegree: 272,
+            windSpeed: 1.37),
+        ForecastModel(
+            iconCode: "01n",
+            dt: 1705136400,
+            temperature: 23.51,
+            windDegree: 280,
+            windSpeed: 1.32),
+        ForecastModel(
+            iconCode: "01n",
+            dt: 1705222800,
+            temperature: 21.96,
+            windDegree: 300,
+            windSpeed: 2.8)
   ]);
 
   ForecastResponseEntity testFiveDayForecastEntity =
       ForecastResponseEntity(code: "200", list: [
-    ForecastModel(iconCode: "02d", dt: 1704866400, temperature: 27.57),
-    ForecastModel(iconCode: "01d", dt: 1704877200, temperature: 30.0),
-    ForecastModel(iconCode: "01n", dt: 1704888000, temperature: 25.87),
-    ForecastModel(iconCode: "01n", dt: 1704898800, temperature: 23.51),
-    ForecastModel(iconCode: "01n", dt: 1704909600, temperature: 21.96)
+        ForecastModel(
+            iconCode: "02d",
+            dt: 1704866400,
+            temperature: 27.57,
+            windDegree: 343,
+            windSpeed: 1.97),
+        ForecastModel(
+            iconCode: "01d",
+            dt: 1704963600,
+            temperature: 30.0,
+            windDegree: 318,
+            windSpeed: 1.64),
+        ForecastModel(
+            iconCode: "01n",
+            dt: 1705050000,
+            temperature: 25.87,
+            windDegree: 272,
+            windSpeed: 1.37),
+        ForecastModel(
+            iconCode: "01n",
+            dt: 1705136400,
+            temperature: 23.51,
+            windDegree: 280,
+            windSpeed: 1.32),
+        ForecastModel(
+            iconCode: "01n",
+            dt: 1705222800,
+            temperature: 21.96,
+            windDegree: 300,
+            windSpeed: 2.8)
   ]);
 
   group('get five day forecast', () {

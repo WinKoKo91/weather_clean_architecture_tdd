@@ -24,13 +24,14 @@ class ForecastLoadingState extends ForecastState {
   const ForecastLoadingState();
 }
 
-
 class ForecastLoadedState extends ForecastState {
   final String code;
-  final List<ForecastEntity> list;
+  final List<ForecastEntity> dailyList;
+  final List<ForecastEntity> hourlyList;
 
-  const ForecastLoadedState({required this.list,required this.code});
+  const ForecastLoadedState(
+      {required this.dailyList, required this.hourlyList, required this.code});
 
   @override
-  List<Object?> get props => [list, code];
+  List<Object?> get props => [dailyList, hourlyList, code];
 }

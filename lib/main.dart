@@ -5,6 +5,7 @@ import 'package:sunshine/core/utils/app_bloc_observer.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'injection_container.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => locator<AirPollutionBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => locator<LocationBloc>(),
         ),
       ],
       child: MaterialApp.router(

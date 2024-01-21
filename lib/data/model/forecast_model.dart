@@ -1,6 +1,5 @@
 import '../../domain/entities/forecast_entity.dart';
 
-
 class ForecastResponseModel extends ForecastResponseEntity {
   const ForecastResponseModel(
       {required String code, required List<ForecastModel> list})
@@ -14,19 +13,23 @@ class ForecastResponseModel extends ForecastResponseEntity {
           code: json['cod']);
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-    'cod': code,
-    'list': list
-        .map(
-          (e) => {
-        'weather': [
-          {'icon': e.iconCode}
-        ],
-        'main': {'temp': e.temperature},
-        'dt': e.dt,
-      },
-    )
-        .toList()
-  };
+        'cod': code,
+        'list': list
+            .map(
+              (e) => {
+                'weather': [
+                  {'icon': e.iconCode}
+                ],
+                "wind": {
+                  "speed": e.windSpeed,
+                  "deg": e.windDegree,
+                },
+                'main': {'temp': e.temperature},
+                'dt': e.dt,
+              },
+            )
+            .toList()
+      };
 
   ForecastResponseEntity toEntity() {
     List<ForecastEntity> entities = list.map((e) => e).toList();
@@ -35,16 +38,20 @@ class ForecastResponseModel extends ForecastResponseEntity {
 }
 
 class ForecastModel extends ForecastEntity {
-   ForecastModel(
+  ForecastModel(
       {required String iconCode,
       required int dt,
       required double temperature,
+      required double windSpeed,
+      required int windDegree,
       String? date,
       String? day})
       : super(
             iconCode: iconCode,
             dt: dt,
             temperature: temperature,
+            windDegree: windDegree,
+            windSpeed: windSpeed,
             date: date,
             day: day);
 
@@ -53,6 +60,10 @@ class ForecastModel extends ForecastEntity {
       temperature: json['main']['temp'].runtimeType == int
           ? (json['main']['temp'] as int).toDouble()
           : json['main']['temp'],
+      windDegree: json['wind']['deg'],
+      windSpeed: json['wind']['speed'].runtimeType == int
+          ? (json['wind']['speed'] as int).toDouble()
+          : json['wind']['speed'],
       dt: json['dt']);
 
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -61,6 +72,10 @@ class ForecastModel extends ForecastEntity {
             'icon': iconCode,
           },
         ],
+        "wind": {
+          "speed": windSpeed,
+          "deg": windDegree,
+        },
         'main': {
           'temp': temperature,
         },
@@ -70,6 +85,8 @@ class ForecastModel extends ForecastEntity {
   ForecastEntity toEntity() => ForecastModel(
       iconCode: iconCode,
       temperature: temperature,
+      windDegree: windDegree,
+      windSpeed: windSpeed,
       dt: dt,
       date: date,
       day: day);

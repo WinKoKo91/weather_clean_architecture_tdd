@@ -10,6 +10,9 @@ import '../bloc/forecast_bloc.dart';
 import '../bloc/forecast_event.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
+import '../bloc/location_bloc.dart';
+import '../bloc/location_event.dart';
+import '../bloc/location_state.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({
@@ -48,7 +51,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       builder: (BuildContext context, SearchController controller) {
         return SearchBar(
           key: const Key('search_bar_widget'),
-          hintText:  'Search city...',
+          hintText: 'Search city...',
           controller: controller,
           padding: const MaterialStatePropertyAll<EdgeInsets>(
               EdgeInsets.only(left: 16.0, right: 8.0)),
@@ -74,7 +77,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       },
       suggestionsBuilder: (BuildContext context, SearchController controller) {
         return [
-          BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+          BlocBuilder<LocationBloc, LocationState>(builder: (context, state) {
             if (state is LocationSearchSuccessState) {
               var locations = state.locations;
               return locations.isEmpty
@@ -129,7 +132,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   void searchListener() {
     if (searchController.text.isNotEmpty) {
       debouncer.run(() {
-        context.read<HomeBloc>().add(OnCitySubmit(searchController.text));
+        context.read<LocationBloc>().add(OnCitySubmit(searchController.text));
       });
     }
   }

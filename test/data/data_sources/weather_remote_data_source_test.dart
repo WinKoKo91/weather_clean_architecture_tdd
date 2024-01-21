@@ -80,7 +80,7 @@ void main() {
         ),
       ).thenAnswer(
         (_) async => http.Response(
-            readJson('helpers/dummy_data/dummy_five_day_forecast_model.json'),
+            readJson('helpers/dummy_data/dummy_forecast_model.json'),
             200),
       );
 

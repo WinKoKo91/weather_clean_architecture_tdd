@@ -5,9 +5,10 @@ import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/error/failure.dart';
 import 'package:sunshine/domain/entities/location.dart';
 import 'package:sunshine/domain/usecases/search_location_by_city_name.dart';
-import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
+import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/location_event.dart';
+import 'package:sunshine/presentation/home/bloc/location_state.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
@@ -15,16 +16,13 @@ void main() {
   late MockSearchLocationsByCityNameUseCase
       mockSearchLocationsByCityNameUseCase;
 
-  late MockGetCurrentWeatherUseCase mockGetCurrentWeatherUseCase;
-  late HomeBloc homeBloc;
+  late LocationBloc locationBloc;
 
   setUp(() {
     mockSearchLocationsByCityNameUseCase =
         MockSearchLocationsByCityNameUseCase();
-    mockGetCurrentWeatherUseCase = MockGetCurrentWeatherUseCase();
 
-    homeBloc = HomeBloc(
-        mockGetCurrentWeatherUseCase, mockSearchLocationsByCityNameUseCase);
+    locationBloc = LocationBloc( mockSearchLocationsByCityNameUseCase);
   });
 
   const testLocationEntities = [
@@ -40,15 +38,15 @@ void main() {
   const testCityNameParam = SearchLocationsParams(testCityName);
 
   test('initial state should be empty', () {
-    expect(homeBloc.state, HomeInitState());
+    expect(locationBloc.state, HomeInitState());
   });
 
-  blocTest<HomeBloc, HomeState>(
+  blocTest<LocationBloc, LocationState>(
       "should emit [HomeCitySearchingState, HomeSearchCityResult] when data is gotten successfully",
       build: () {
         when(mockSearchLocationsByCityNameUseCase.call(testCityNameParam))
             .thenAnswer((_) async => const Right(testLocationEntities));
-        return homeBloc;
+        return locationBloc;
       },
       act: (bloc) => bloc.add(const OnCitySubmit(testCityName)),
       wait: const Duration(milliseconds: 500),
@@ -57,13 +55,13 @@ void main() {
             const LocationSearchSuccessState(testLocationEntities)
           ]);
 
-  blocTest<HomeBloc, HomeState>(
+  blocTest<LocationBloc, LocationState>(
       "should emit [HomeCitySearchingState, HomeSearchCityResult] when data is gotten successfully",
       build: () {
         when(mockSearchLocationsByCityNameUseCase.call(testCityNameParam))
             .thenAnswer(
                 (_) async => const Left(ServerFailure('Server failure')));
-        return homeBloc;
+        return locationBloc;
       },
       act: (bloc) => bloc.add(const OnCitySubmit(testCityName)),
       wait: const Duration(milliseconds: 500),

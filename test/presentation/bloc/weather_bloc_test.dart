@@ -12,17 +12,14 @@ import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockGetCurrentWeatherUseCase mockGetCurrentWeatherUseCase;
-  late MockSearchLocationsByCityNameUseCase
-      mockSearchLocationsByCityNameUseCase;
+
   late HomeBloc homeBloc;
 
   setUp(() {
     mockGetCurrentWeatherUseCase = MockGetCurrentWeatherUseCase();
-    mockSearchLocationsByCityNameUseCase =
-        MockSearchLocationsByCityNameUseCase();
 
     homeBloc = HomeBloc(
-        mockGetCurrentWeatherUseCase, mockSearchLocationsByCityNameUseCase);
+        mockGetCurrentWeatherUseCase);
   });
 
   const testWeather = WeatherEntity(

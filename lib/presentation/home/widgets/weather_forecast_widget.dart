@@ -19,7 +19,7 @@ class WeatherForecastWidget extends StatelessWidget {
       if (state is ForecastLoadedState) {
         return Container(
           key: const Key('forecast_data'),
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          padding:const  EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,7 +36,7 @@ class WeatherForecastWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    ForecastEntity forecast = state.list[index];
+                    ForecastEntity forecast = state.dailyList[index];
                     return ListTile(
                       minLeadingWidth: 128,
                       leading: Row(
@@ -68,7 +68,7 @@ class WeatherForecastWidget extends StatelessWidget {
                       trailing: Text(forecast.day ?? 'Thrusday'),
                     );
                   },
-                  itemCount: state.list.length,
+                  itemCount: state.dailyList.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const SizedBox(
                     height: 2,

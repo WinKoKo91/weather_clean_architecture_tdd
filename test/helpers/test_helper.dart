@@ -10,6 +10,7 @@ import 'package:sunshine/domain/usecases/get_today_air_pollution.dart';
 import 'package:sunshine/domain/usecases/search_location_by_city_name.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
 
 @GenerateMocks(
   [
@@ -21,6 +22,7 @@ import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
     GetTodayAirPollutionUseCase,
     HomeBloc,
     ForecastBloc,
+    LocationBloc,
     LocationRepository,
     LocationRemoteDataSource
   ],

@@ -17,3 +17,7 @@ class OnCitySubmit extends LocationEvent {
   List<Object?> get props => [cityName];
 }
 
+
+class GetCurrentLocation extends LocationEvent {
+
+}

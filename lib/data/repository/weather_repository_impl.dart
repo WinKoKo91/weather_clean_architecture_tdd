@@ -53,5 +53,17 @@ class WeatherRepositoryImpl extends WeatherRepository {
     }
   }
 
+  @override
+  ResultFuture<WeatherEntity> getCurrentWeatherByLocation({required double lat, required double lon}) async {
+    try {
+      final result = await weatherRemoteDataSource.getCurrentWeatherByLocation(lat:lat, lon:lon);
+      return Right(result.toEntity());
+    } on ServerException catch (error) {
+      return Left(ServerFailure(error.message??"An error has occurred"));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
 
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/forecast_event.dart';
 
 import '../../../core/constants.dart';
 import '../bloc/home_bloc.dart';
@@ -14,23 +12,17 @@ class WeatherWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
-        if (state is WeatherLoaded) {
-
-        }
+        if (state is WeatherLoaded) {}
       },
       builder: (context, state) {
-        if (state is WeatherLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
         if (state is WeatherLoadFailure) {
           return Text(state.message);
         }
 
         if (state is WeatherLoaded) {
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Card(
               child: Padding(
                 padding: const EdgeInsets.all(20),

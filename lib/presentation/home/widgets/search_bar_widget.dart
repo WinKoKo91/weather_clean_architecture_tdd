@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rxdart/utils.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
@@ -17,6 +18,7 @@ import '../bloc/location_state.dart';
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({
     super.key,
+
   });
 
   @override
@@ -29,10 +31,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   void initState() {
-    final weatherState = context.read<HomeBloc>().state;
-    if (weatherState is WeatherLoaded) {
-      searchController.text = weatherState.data.cityName;
-    }
     searchController.addListener(searchListener);
     super.initState();
   }
@@ -46,33 +44,57 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return SearchAnchor(
       searchController: searchController,
       builder: (BuildContext context, SearchController controller) {
-        return SearchBar(
-          key: const Key('search_bar_widget'),
-          hintText: 'Search city...',
-          controller: controller,
-          padding: const MaterialStatePropertyAll<EdgeInsets>(
-              EdgeInsets.only(left: 16.0, right: 8.0)),
-          leading: const Icon(Icons.search),
-          onTap: controller.openView,
-          onChanged: (_) {
-            controller.openView();
+        return BlocConsumer<LocationBloc, LocationState>(
+          listener: (context, state) {
+            if (state is CurrentLocationLoaded) {
+              onGetCurrentLocation(state.lat, state.lon);
+            }
           },
-          onSubmitted: (value) {},
-          trailing: [
-            IconButton(
-              key: const Key('icon_button_location'),
-              onPressed: () {
-                print("Click location");
+          builder: (context, state) {
+            return SearchBar(
+              key: const Key('search_bar_widget'),
+              hintText: 'Search city...',
+              controller: controller,
+              padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  EdgeInsets.only(left: 16.0, right: 8.0)),
+              leading: const Icon(Icons.search),
+              onTap: controller.openView,
+              onChanged: (_) {
+                controller.openView();
               },
-              icon: const Icon(
-                Icons.my_location,
-                color: Colors.white,
-              ),
-            )
-          ],
+              onSubmitted: (value) {
+                if (value.isNotEmpty) {
+                  context.read<LocationBloc>().add(OnCitySubmit(value));
+                }
+              },
+              trailing: [
+                state is CurrentLocationLoading
+                    ? Container(
+                        height: 24,
+                        width: 24,
+                        margin: const EdgeInsets.only(right: 8),
+                        child: const CircularProgressIndicator())
+                    : IconButton(
+                        key: const Key('icon_button_location'),
+                        onPressed: () {
+                          searchController.clear();
+                          context
+                              .read<LocationBloc>()
+                              .add(GetCurrentLocation());
+                        },
+                        icon: const Icon(
+                          Icons.my_location,
+                          color: Colors.white,
+                        ),
+                      )
+              ],
+            );
+          },
         );
       },
       suggestionsBuilder: (BuildContext context, SearchController controller) {
@@ -97,17 +119,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                           onTap: () {
                             controller.closeView(location.name!);
                             FocusScope.of(context).unfocus();
-
-                            context
-                                .read<HomeBloc>()
-                                .add(OnCityChanged(location.name!));
-
-                            context.read<ForecastBloc>().add(OnGetForecastEvent(
-                                lat: location.lat!, lon: location.lon!));
-
-                            context.read<AirPollutionBloc>().add(
-                                OnGetAirPollutionEvent(
-                                    lat: location.lat!, lon: location.lon!));
+                            onGetCurrentLocation(location.lat!, location.lon!);
                           },
                         );
                       });
@@ -135,5 +147,15 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         context.read<LocationBloc>().add(OnCitySubmit(searchController.text));
       });
     }
+  }
+
+  void onGetCurrentLocation(double lat, double lon) {
+    context.read<HomeBloc>().add(WeatherByLocation(lat, lon));
+
+    context.read<ForecastBloc>().add(OnGetForecastEvent(lat: lat, lon: lon));
+
+    context
+        .read<AirPollutionBloc>()
+        .add(OnGetAirPollutionEvent(lat: lat, lon: lon));
   }
 }

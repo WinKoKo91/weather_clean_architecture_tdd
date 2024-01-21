@@ -2,17 +2,17 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sunshine/domain/entities/weather.dart';
-import 'package:sunshine/domain/usecases/get_current_weather.dart';
+import 'package:sunshine/domain/usecases/get_current_weather_by_name.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetCurrentWeatherUseCase getCurrentWeatherUseCase;
+  late GetCurrentWeatherByNameUseCase getCurrentWeatherUseCase;
   late MockWeatherRepository mockWeatherRepository;
 
   setUp(() {
     mockWeatherRepository = MockWeatherRepository();
-    getCurrentWeatherUseCase = GetCurrentWeatherUseCase(mockWeatherRepository);
+    getCurrentWeatherUseCase = GetCurrentWeatherByNameUseCase(mockWeatherRepository);
   });
 
   String testCityName = 'Yangon';

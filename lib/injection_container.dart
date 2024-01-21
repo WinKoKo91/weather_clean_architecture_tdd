@@ -14,20 +14,25 @@ import 'data/datasource/weather_remote_data_source.dart';
 import 'data/repository/weather_repository_impl.dart';
 import 'domain/repositories/location_repository.dart';
 import 'domain/repositories/weather_repository.dart';
-import 'domain/usecases/get_current_weather.dart';
+import 'domain/usecases/get_current_weather_by_name.dart';
+import 'domain/usecases/get_current_weather_by_location.dart';
 
 final locator = GetIt.instance;
 
 void setupLocator() {
   // bloc
-  locator.registerFactory(() => HomeBloc( locator()));
-  locator.registerFactory(() => ForecastBloc( locator()));
-  locator.registerFactory(() => AirPollutionBloc( locator()));
-  locator.registerFactory(() => LocationBloc( locator()));
+  locator.registerFactory(() => HomeBloc(locator(), locator()));
+  locator.registerFactory(() => ForecastBloc(locator()));
+  locator.registerFactory(() => AirPollutionBloc(locator()));
+  locator.registerFactory(() => LocationBloc(locator()));
 
   // useCase
-  locator.registerLazySingleton(() => GetCurrentWeatherUseCase(locator()));
-  locator.registerLazySingleton(() => SearchLocationsByCityNameUseCase(locator()));
+  locator
+      .registerLazySingleton(() => GetCurrentWeatherByNameUseCase(locator()));
+  locator.registerLazySingleton(
+      () => GetCurrentWeatherByLocationUseCase(locator()));
+  locator
+      .registerLazySingleton(() => SearchLocationsByCityNameUseCase(locator()));
   locator.registerLazySingleton(() => GetFiveDayForecastUseCase(locator()));
   locator.registerLazySingleton(() => GetTodayAirPollutionUseCase(locator()));
 
@@ -36,7 +41,7 @@ void setupLocator() {
     () => WeatherRepositoryImpl(weatherRemoteDataSource: locator()),
   );
   locator.registerLazySingleton<LocationRepository>(
-        () => LocationRepositoryImpl(locationRemoteDataSource: locator()),
+    () => LocationRepositoryImpl(locationRemoteDataSource: locator()),
   );
 
   // data source
@@ -47,11 +52,10 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton<LocationRemoteDataSource>(
-        () => LocationRemoteDataSourceImpl(
+    () => LocationRemoteDataSourceImpl(
       client: locator(),
     ),
   );
-
 
   // external
   locator.registerLazySingleton(() => http.Client());

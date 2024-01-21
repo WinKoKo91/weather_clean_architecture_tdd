@@ -11,15 +11,17 @@ import 'package:sunshine/presentation/home/bloc/home_state.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late MockGetCurrentWeatherUseCase mockGetCurrentWeatherUseCase;
+  late MockGetCurrentWeatherByNameUseCase mockGetCurrentWeatherByNameUseCase;
+  late MockGetCurrentWeatherByLocationUseCase mockGetCurrentWeatherByLocationUseCase;
 
   late HomeBloc homeBloc;
 
   setUp(() {
-    mockGetCurrentWeatherUseCase = MockGetCurrentWeatherUseCase();
+    mockGetCurrentWeatherByNameUseCase = MockGetCurrentWeatherByNameUseCase();
+    mockGetCurrentWeatherByLocationUseCase = MockGetCurrentWeatherByLocationUseCase();
 
     homeBloc = HomeBloc(
-        mockGetCurrentWeatherUseCase);
+        mockGetCurrentWeatherByNameUseCase, mockGetCurrentWeatherByLocationUseCase);
   });
 
   const testWeather = WeatherEntity(
@@ -50,11 +52,11 @@ void main() {
   blocTest<HomeBloc, HomeState>(
       'should emit [WeatherLoading, WeatherLoaded] when data is gotten successfully',
       build: () {
-        when(mockGetCurrentWeatherUseCase.execute(testCityName))
+        when(mockGetCurrentWeatherByNameUseCase.execute(testCityName))
             .thenAnswer((_) async => const Right(testWeather));
         return homeBloc;
       },
-      act: (bloc) => bloc.add(const OnCityChanged(testCityName)),
+      act: (bloc) => bloc.add(const GetWeatherByName(testCityName)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
             WeatherLoading(),
@@ -70,11 +72,11 @@ void main() {
   blocTest<HomeBloc, HomeState>(
       'should emit [WeatherLoading, WeatherLoadFailure] when get data is unsuccessful',
       build: () {
-        when(mockGetCurrentWeatherUseCase.execute(testCityName)).thenAnswer(
+        when(mockGetCurrentWeatherByNameUseCase.execute(testCityName)).thenAnswer(
             (_) async => const Left(ServerFailure('Server failure')));
         return homeBloc;
       },
-      act: (bloc) => bloc.add(OnCityChanged(testCityName)),
+      act: (bloc) => bloc.add(GetWeatherByName(testCityName)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
             WeatherLoading(),

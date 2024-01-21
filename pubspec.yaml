@@ -27,6 +27,9 @@ dependencies:
   intl: ^0.19.0
   json_annotation: ^4.8.0
   flutter_svg: ^2.0.9
+  location: ^5.0.3
+  geolocator: ^10.1.0
+  permission_handler: ^11.2.0
 
 
 dev_dependencies:

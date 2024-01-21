@@ -8,8 +8,11 @@ class Urls {
   static String getCurrentWeatherByName(String city) =>
       '$baseUrl/weather?q=$city&units=metric&appid=$apiKey';
 
+  static String getCurrentWeatherByLocation(double lat, double long) =>
+      '$baseUrl/weather?lat=$lat&lon=$long&units=metric&appid=$apiKey';
+
   static String getFiveDayForecast(
-      {required double lat, required double lon}) =>
+          {required double lat, required double lon}) =>
       '$baseUrl/forecast?lat=$lat&lon=$lon&units=metric&appid=$apiKey';
 
   static String getAirPollution({required double lat, required double lon}) =>
@@ -24,4 +27,3 @@ class Urls {
   static String weatherIcon(String iconCode) =>
       'http://openweathermap.org/img/wn/$iconCode@2x.png';
 }
-

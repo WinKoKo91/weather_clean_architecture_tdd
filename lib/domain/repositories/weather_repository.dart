@@ -7,6 +7,9 @@ import '../entities/weather.dart';
 abstract class WeatherRepository {
   ResultFuture<WeatherEntity> getCurrentWeather(String cityName);
 
+  ResultFuture<WeatherEntity> getCurrentWeatherByLocation(
+      {required double lat, required double lon});
+
   ResultFuture<ForecastResponseEntity> getFiveDayForecast(
       {required double lat, required double lon});
 

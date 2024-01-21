@@ -62,7 +62,7 @@ class HourlyWindListWidget extends StatelessWidget {
             ForecastEntity item = list[index];
             return Padding(
               padding: EdgeInsets.only(
-                  left: index == 0 ? 16.0 : 0, right: index == 7 ? 16.0 : 0),
+                  left: index == 0 ? 16.0 : 0, right: index == list.length-1 ? 16.0 : 0),
               child: HourlyWidget(
                 time: item.hour!,
                 value: '${item.windSpeed}km',
@@ -82,7 +82,7 @@ class HourlyWindListWidget extends StatelessWidget {
               width: 4,
             );
           },
-          itemCount: 8),
+          itemCount: list.length),
     );
   }
 }
@@ -107,7 +107,7 @@ class HourlyTemperatureListWidget extends StatelessWidget {
             ForecastEntity item = list[index];
             return Padding(
               padding: EdgeInsets.only(
-                  left: index == 0 ? 16.0 : 0, right: index == 7 ? 16.0 : 0),
+                  left: index == 0 ? 16.0 : 0, right: index == list.length-1 ? 16.0 : 0),
               child: HourlyWidget(
                 time: item.hour!,
                 value: '${item.temperature}°',

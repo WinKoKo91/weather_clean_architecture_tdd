@@ -12,6 +12,8 @@ import '../model/weather_model.dart';
 abstract class WeatherRemoteDataSource {
   Future<WeatherModel> getCurrentWeather(String cityName);
 
+  Future<WeatherModel> getCurrentWeatherByLocation(  {required double lat, required double lon});
+
   Future<ForecastResponseModel> getFiveDayForecast(
       {required double lat, required double lon});
 
@@ -76,6 +78,21 @@ class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
       logger.i(response.body);
       var result = json.decode(response.body);
       return AirPollutionResponseModel.fromJson(result);
+    } else {
+      logger.e(response.body, error: response);
+      var result = json.decode(response.body);
+      throw ServerException(message: result['message']);
+    }
+  }
+
+  @override
+  Future<WeatherModel> getCurrentWeatherByLocation({required double lat, required double lon}) async {
+    final response =
+        await client.get(Uri.parse(Urls.getCurrentWeatherByLocation(lat, lon)));
+
+    if (response.statusCode == 200) {
+      logger.i(response.body);
+      return WeatherModel.fromJson(json.decode(response.body));
     } else {
       logger.e(response.body, error: response);
       var result = json.decode(response.body);

@@ -23,6 +23,19 @@ class LocationSearchSuccessState extends LocationState {
 
 class LocationSearchingState extends LocationState {}
 
+class CurrentLocationLoading extends LocationState {
+
+}
+
+
+class CurrentLocationLoaded extends LocationState {
+   final double lon, lat;
+
+   const CurrentLocationLoaded(this.lat, this.lon);
+   @override
+   List<Object?> get props => [lat, lon];
+}
+
 class LocationFailState extends LocationState {
   final String errorMessage;
 

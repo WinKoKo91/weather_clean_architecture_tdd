@@ -112,7 +112,7 @@ void main() {
       when(() => mockHomeBloc.state).thenReturn(const WeatherLoaded(
         data: testWeather,
         dateTime: '12/31/2023 11:22 AM',
-        sunrise: '6:37 AM',
+        sunrise: '6:37 AM', //
         sunset: '5:51 PM',
         visibility: '8.0',
       ));

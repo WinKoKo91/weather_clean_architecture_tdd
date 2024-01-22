@@ -41,7 +41,7 @@ void main() {
       visibility: 8000,
       country: 'US');
 
-  const String testDatetime = '12/31/2023 11:22 AM';
+  const String testDatetime = '12/31/2023 4:52 AM';  // code magic 4:52 AM, local 11:22 AM
 
   const testCityName = 'New York';
 
@@ -63,8 +63,8 @@ void main() {
             const WeatherLoaded(
               data: testWeather,
               dateTime: testDatetime,
-              sunrise: '6:37 AM',
-              sunset: '5:51 PM',
+              sunrise: '12:07 AM', // code magic 12:07 AM, local 6:37 AM
+              sunset: '11:21 AM', // code magic 11:21 AM, local 5:51 PM
               visibility: '8.0',
             )
           ]);

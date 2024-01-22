@@ -38,7 +38,7 @@ void main() {
   const testCityNameParam = SearchLocationsParams(testCityName);
 
   test('initial state should be empty', () {
-    expect(locationBloc.state, HomeInitState());
+    expect(locationBloc.state, LocationInitState());
   });
 
   blocTest<LocationBloc, LocationState>(
@@ -56,7 +56,7 @@ void main() {
           ]);
 
   blocTest<LocationBloc, LocationState>(
-      "should emit [HomeCitySearchingState, HomeSearchCityResult] when data is gotten successfully",
+      "should emit [LocationSearchingState, LocationFailState] when data is gotten successfully",
       build: () {
         when(mockSearchLocationsByCityNameUseCase.call(testCityNameParam))
             .thenAnswer(
@@ -67,6 +67,6 @@ void main() {
       wait: const Duration(milliseconds: 500),
       expect: () => [
             LocationSearchingState(),
-            const HomeFailState('Server failure'),
+            const LocationFailState('Server failure'),
           ]);
 }

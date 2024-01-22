@@ -40,7 +40,7 @@ void main() {
         .thenAnswer((_) async => const Right(testWeatherDetail));
 
     // act
-    final result = await getCurrentWeatherUseCase.execute(testCityName);
+    final result = await getCurrentWeatherUseCase(testCityName);
 
     // assert
     expect(result,const Right(testWeatherDetail));

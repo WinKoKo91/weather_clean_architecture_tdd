@@ -13,8 +13,7 @@ import 'package:sunshine/presentation/home/bloc/forecast_event.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 import 'package:sunshine/presentation/home/widgets/weather_forecast_widget.dart';
 
-class MockForecastBloc extends MockBloc<ForecastEvent, ForecastState>
-    implements ForecastBloc {}
+import '../mock_bloc.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

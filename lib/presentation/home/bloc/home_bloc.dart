@@ -21,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       : super(HomeInitState()) {
     on<GetWeatherByName>((event, emit) async {
       emit(WeatherLoading());
-      final result = await _getCurrentWeatherUserCase.execute(event.cityName);
+      final result = await _getCurrentWeatherUserCase(event.cityName);
       result.fold((failure) {
         emit(WeatherLoadFailure(failure.message));
       }, (data) {

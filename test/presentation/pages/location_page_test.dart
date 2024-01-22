@@ -12,21 +12,23 @@ import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
+import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/location_state.dart';
 import 'package:sunshine/presentation/home/pages/mobile/home_mobile_page.dart';
 
-class MockHomeBloc extends MockBloc<HomeEvent, HomeState> implements HomeBloc {}
+import '../mock_bloc.dart';
 
-class MockForecastBloc extends MockBloc<ForecastEvent, ForecastState>
-    implements ForecastBloc {}
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late MockHomeBloc mockHomeBloc;
   late MockForecastBloc mockForecastBloc;
+  late MockLocationBloc mockLocationBloc;
 
   setUp(() {
     mockHomeBloc = MockHomeBloc();
     mockForecastBloc = MockForecastBloc();
+    mockLocationBloc = MockLocationBloc();
     HttpOverrides.global = null;
   });
 
@@ -38,6 +40,9 @@ void main() {
         ),
         BlocProvider<ForecastBloc>(
           create: (context) => mockForecastBloc,
+        ),
+        BlocProvider<LocationBloc>(
+          create: (context) => mockLocationBloc,
         ),
       ],
       child: MaterialApp(
@@ -51,6 +56,7 @@ void main() {
     //arrange
     when(() => mockHomeBloc.state).thenReturn(HomeInitState());
     when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
+    when(() => mockLocationBloc.state).thenReturn(LocationInitState());
     //act
     await widgetTester.pumpWidget(makeTestableWidget(const HomeMobilePage()));
     //assert

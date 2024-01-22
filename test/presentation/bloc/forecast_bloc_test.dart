@@ -62,6 +62,18 @@ void main() {
         windSpeed: 2.8)
   ]);
 
+  List<ForecastModel> testHourlyForecast = [
+    ForecastModel(
+        iconCode: "02d",
+        dt: 1704866400,
+        temperature: 27.57,
+        windDegree: 343,
+        windSpeed: 1.97,
+        date: '10 Jan',
+        day: 'Wednesday',
+        hour: '12 PM'),
+  ];
+
   test('initial state should be empty', () {
     expect(forecastBloc.state, ForecastInitState());
   });
@@ -80,7 +92,7 @@ void main() {
             ForecastLoadedState(
                 code: testFiveDayForecastEntity.code,
                 dailyList: testFiveDayForecastEntity.list,
-                hourlyList: [])
+                hourlyList: testHourlyForecast)
           ]);
 
   blocTest<ForecastBloc, ForecastState>(

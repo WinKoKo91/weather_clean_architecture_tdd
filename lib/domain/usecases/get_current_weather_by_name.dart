@@ -7,12 +7,13 @@ import '../../core/utils/typedef.dart';
 import '../entities/weather.dart';
 import '../repositories/weather_repository.dart';
 
-class GetCurrentWeatherByNameUseCase {
+class GetCurrentWeatherByNameUseCase   extends UseCaseWithParams<WeatherEntity, String> {
   final WeatherRepository weatherRepository;
 
   GetCurrentWeatherByNameUseCase(this.weatherRepository);
 
-  Future<Either<Failure, WeatherEntity>> execute(String cityName) {
-    return weatherRepository.getCurrentWeather(cityName);
+  @override
+  Future<Either<Failure, WeatherEntity>> call(String params) {
+    return weatherRepository.getCurrentWeather(params);
   }
 }

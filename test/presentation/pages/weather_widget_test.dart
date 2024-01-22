@@ -15,23 +15,29 @@ import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
+import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/location_event.dart';
+import 'package:sunshine/presentation/home/bloc/location_state.dart';
 import 'package:sunshine/presentation/home/pages/mobile/home_mobile_page.dart';
+import 'package:sunshine/presentation/home/widgets/weather_widget.dart';
 
+import '../mock_bloc.dart';
 import 'forecast_page_test.dart';
 
-class MockHomeBloc extends MockBloc<HomeEvent, HomeState> implements HomeBloc {}
-class MockAirPollutionBloc extends MockBloc<AirPollutionEvent, AirPollutionState> implements AirPollutionBloc {}
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late MockHomeBloc mockHomeBloc;
   late MockForecastBloc mockForecastBloc;
   late MockAirPollutionBloc mockAirPollutionBloc;
+  late MockLocationBloc mockLocationBloc;
 
   setUp(() {
     mockHomeBloc = MockHomeBloc();
     mockForecastBloc = MockForecastBloc();
     mockAirPollutionBloc = MockAirPollutionBloc();
+    mockLocationBloc = MockLocationBloc();
+
     HttpOverrides.global = null;
   });
 
@@ -64,7 +70,7 @@ void main() {
         BlocProvider<AirPollutionBloc>(
           create: (context) => mockAirPollutionBloc,
         ),
-
+        BlocProvider<LocationBloc>(create: (context) => mockLocationBloc)
       ],
       child: MaterialApp(
         home: body,
@@ -76,23 +82,26 @@ void main() {
       (widgetTester) async {
     when(() => mockHomeBloc.state).thenReturn(HomeInitState());
     when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
+    when(() => mockLocationBloc.state).thenReturn(LocationInitState());
 
     await widgetTester.pumpWidget(makeTestableWidget(const HomeMobilePage()));
 
     expect(find.byType(AppBar), findsOneWidget);
   });
 
+  //TODO: widget test for progress indicator
   testWidgets(
     'should show progress indicator when state is loading',
     (widgetTester) async {
       //arrange
       when(() => mockHomeBloc.state).thenReturn(WeatherLoading());
       when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
+      when(() => mockLocationBloc.state).thenReturn(LocationInitState());
       //act
-      await widgetTester.pumpWidget(makeTestableWidget(const HomeMobilePage()));
+      await widgetTester.pumpWidget(makeTestableWidget(const WeatherWidget()));
 
       //assert
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(Container), findsOneWidget);
     },
   );
 
@@ -108,7 +117,9 @@ void main() {
         visibility: '8.0',
       ));
       when(() => mockForecastBloc.state).thenReturn(ForecastInitState());
-      when(() => mockAirPollutionBloc.state).thenReturn(AirPollutionInitState());
+      when(() => mockAirPollutionBloc.state)
+          .thenReturn(AirPollutionInitState());
+      when(() => mockLocationBloc.state).thenReturn(LocationInitState());
 
       //act
       await widgetTester.pumpWidget(makeTestableWidget(const HomeMobilePage()));

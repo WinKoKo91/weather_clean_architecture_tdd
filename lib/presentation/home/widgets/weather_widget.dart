@@ -10,10 +10,7 @@ class WeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeBloc, HomeState>(
-      listener: (context, state) {
-        if (state is WeatherLoaded) {}
-      },
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         if (state is WeatherLoadFailure) {
           return Text(state.message);

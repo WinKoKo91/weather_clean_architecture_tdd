@@ -45,7 +45,8 @@ class ForecastModel extends ForecastEntity {
       required double windSpeed,
       required int windDegree,
       String? date,
-      String? day})
+      String? day,
+      String? hour})
       : super(
             iconCode: iconCode,
             dt: dt,
@@ -53,6 +54,7 @@ class ForecastModel extends ForecastEntity {
             windDegree: windDegree,
             windSpeed: windSpeed,
             date: date,
+      hour: hour,
             day: day);
 
   factory ForecastModel.fromJson(Map<String, dynamic> json) => ForecastModel(

@@ -445,20 +445,20 @@ class MockGetCurrentWeatherByNameUseCase extends _i1.Mock
       ) as _i6.WeatherRepository);
 
   @override
-  _i13.Future<_i2.Either<_i14.Failure, _i15.WeatherEntity>> execute(
-          String? cityName) =>
+  _i13.Future<_i2.Either<_i14.Failure, _i15.WeatherEntity>> call(
+          String? params) =>
       (super.noSuchMethod(
         Invocation.method(
-          #execute,
-          [cityName],
+          #call,
+          [params],
         ),
         returnValue:
             _i13.Future<_i2.Either<_i14.Failure, _i15.WeatherEntity>>.value(
                 _FakeEither_0<_i14.Failure, _i15.WeatherEntity>(
           this,
           Invocation.method(
-            #execute,
-            [cityName],
+            #call,
+            [params],
           ),
         )),
       ) as _i13.Future<_i2.Either<_i14.Failure, _i15.WeatherEntity>>);
@@ -964,6 +964,15 @@ class MockLocationBloc extends _i1.Mock implements _i30.LocationBloc {
         Invocation.getter(#isClosed),
         returnValue: false,
       ) as bool);
+
+  @override
+  _i13.Future<bool> requestLocationPermission() => (super.noSuchMethod(
+        Invocation.method(
+          #requestLocationPermission,
+          [],
+        ),
+        returnValue: _i13.Future<bool>.value(false),
+      ) as _i13.Future<bool>);
 
   @override
   void add(_i31.LocationEvent? event) => super.noSuchMethod(

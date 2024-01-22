@@ -52,7 +52,7 @@ void main() {
   blocTest<HomeBloc, HomeState>(
       'should emit [WeatherLoading, WeatherLoaded] when data is gotten successfully',
       build: () {
-        when(mockGetCurrentWeatherByNameUseCase.execute(testCityName))
+        when(mockGetCurrentWeatherByNameUseCase(testCityName))
             .thenAnswer((_) async => const Right(testWeather));
         return homeBloc;
       },
@@ -72,11 +72,11 @@ void main() {
   blocTest<HomeBloc, HomeState>(
       'should emit [WeatherLoading, WeatherLoadFailure] when get data is unsuccessful',
       build: () {
-        when(mockGetCurrentWeatherByNameUseCase.execute(testCityName)).thenAnswer(
+        when(mockGetCurrentWeatherByNameUseCase(testCityName)).thenAnswer(
             (_) async => const Left(ServerFailure('Server failure')));
         return homeBloc;
       },
-      act: (bloc) => bloc.add(GetWeatherByName(testCityName)),
+      act: (bloc) => bloc.add(const GetWeatherByName(testCityName)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
             WeatherLoading(),

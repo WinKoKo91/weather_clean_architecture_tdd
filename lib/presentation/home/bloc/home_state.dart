@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../domain/entities/location.dart';
 import '../../../domain/entities/weather.dart';
 
 abstract class HomeState extends Equatable {

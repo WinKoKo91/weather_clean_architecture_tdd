@@ -5,7 +5,6 @@ import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/error/failure.dart';
 import 'package:sunshine/domain/entities/location.dart';
 import 'package:sunshine/domain/usecases/search_location_by_city_name.dart';
-import 'package:sunshine/presentation/home/bloc/home_state.dart';
 import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/location_event.dart';
 import 'package:sunshine/presentation/home/bloc/location_state.dart';

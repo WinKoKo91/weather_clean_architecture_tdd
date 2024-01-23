@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return  const Responsive(
+    return const Responsive(
       desktop: HomeWebPage(),
       mobile: HomeMobilePage(),
       tablet: HomeTabletPage(),

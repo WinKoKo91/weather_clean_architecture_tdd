@@ -1,12 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/transformers.dart';
-import 'package:sunshine/core/services/location_service.dart';
 import 'package:sunshine/domain/entities/weather.dart';
 import 'package:sunshine/domain/usecases/get_current_weather_by_location.dart';
 
 import '../../../domain/usecases/get_current_weather_by_name.dart';
-import '../../../domain/usecases/search_location_by_city_name.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 

@@ -1,14 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 import 'package:rxdart/transformers.dart';
 
 import '../../../core/services/location_service.dart';
 import '../../../domain/usecases/search_location_by_city_name.dart';
-import 'home_event.dart';
-import 'home_state.dart';
 import 'location_event.dart';
 import 'location_state.dart';
 

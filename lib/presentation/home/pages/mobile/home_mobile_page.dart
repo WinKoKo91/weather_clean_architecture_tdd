@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sunshine/presentation/home/widgets/powered_by_widget.dart';
 
 import '../../widgets/hourly_forecast_widget.dart';
-import '../../widgets/today_highlights_widget.dart';
 import '../../widgets/search_bar_widget.dart';
+import '../../widgets/today_highlights_widget.dart';
 import '../../widgets/weather_forecast_widget.dart';
 import '../../widgets/weather_widget.dart';
 
@@ -36,18 +36,16 @@ class HomeMobilePage extends StatelessWidget {
           ),
         ),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            WeatherWidget(),
-            WeatherForecastWidget(),
-            TodayHighlightsWidget(),
-            HourlyForecastWidget(),
-            PoweredByWidget(),
-          ],
-        ),
-      ),
+      body: SingleChildScrollView(
+          child: Column(
+        children: [
+          WeatherWidget(),
+          WeatherForecastWidget(),
+          TodayHighlightsWidget(),
+          HourlyForecastWidget(),
+          PoweredByWidget(),
+        ],
+      )),
     );
   }
 }

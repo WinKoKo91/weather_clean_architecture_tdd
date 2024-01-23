@@ -22,6 +22,7 @@ class WeatherForecastWidget extends StatelessWidget {
           padding:const  EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
                 ' 5 days forecast',

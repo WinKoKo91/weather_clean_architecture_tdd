@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,7 +8,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:sunshine/data/model/forecast_model.dart';
 import 'package:sunshine/domain/entities/forecast_entity.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/forecast_event.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 import 'package:sunshine/presentation/home/widgets/weather_forecast_widget.dart';
 

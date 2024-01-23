@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/hourly_forecast_widget.dart';
 import '../../widgets/search_bar_widget.dart';
+import '../../widgets/today_highlights_widget.dart';
 import '../../widgets/weather_forecast_widget.dart';
 import '../../widgets/weather_widget.dart';
 
@@ -9,12 +11,13 @@ class HomeWebPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         leading: Row(
           children: [
-            const SizedBox(width: 20,),
+            const SizedBox(
+              width: 20,
+            ),
             Image.asset(
               'assets/logo/sunshine_dart_logo.png',
               height: 40,
@@ -24,7 +27,10 @@ class HomeWebPage extends StatelessWidget {
             const SizedBox(
               width: 8,
             ),
-            const Text("Sunshine", style:  TextStyle(fontSize: 22),),
+            const Text(
+              "Sunshine",
+              style: TextStyle(fontSize: 22),
+            ),
           ],
         ),
         leadingWidth: 200,
@@ -32,18 +38,35 @@ class HomeWebPage extends StatelessWidget {
         title: SearchBarWidget(),
       ),
       body: Container(
-        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                  child: SizedBox(width: width * 0.4, child: WeatherWidget())),
-              const WeatherForecastWidget(),
-            ],
-          ),
+        child: const Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              flex: 2,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    WeatherWidget(),
+                    WeatherForecastWidget(),
+                  ],
+                ),
+              ),
+            ),
+            Flexible(
+              flex: 3,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TodayHighlightsWidget(),
+                    HourlyForecastWidget(),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

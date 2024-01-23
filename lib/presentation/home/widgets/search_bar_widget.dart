@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rxdart/utils.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_event.dart';
-import 'package:sunshine/presentation/home/bloc/home_state.dart';
 
 import '../../../core/utils/debouncer.dart';
 import '../../../domain/entities/location.dart';

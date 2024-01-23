@@ -11,6 +11,7 @@ class WeatherWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
+
       builder: (context, state) {
         if (state is WeatherLoadFailure) {
           return Text(state.message);
@@ -40,10 +41,12 @@ class WeatherWidget extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 40.0, fontWeight: FontWeight.bold),
                         ),
-                        Image(
-                          image: NetworkImage(
-                            Urls.weatherIcon(
-                              state.data.iconCode,
+                        Flexible(
+                          child: Image(
+                            image: NetworkImage(
+                              Urls.weatherIcon(
+                                state.data.iconCode,
+                              ),
                             ),
                           ),
                         ),

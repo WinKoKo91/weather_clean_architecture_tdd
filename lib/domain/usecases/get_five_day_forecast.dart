@@ -1,10 +1,7 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sunshine/core/usecase/usecase.dart';
 import 'package:sunshine/core/utils/typedef.dart';
-import 'package:sunshine/data/model/forecast_model.dart';
 
-import '../../core/error/failure.dart';
 import '../entities/forecast_entity.dart';
 import '../repositories/weather_repository.dart';
 

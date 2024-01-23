@@ -14,8 +14,8 @@ import 'data/datasource/weather_remote_data_source.dart';
 import 'data/repository/weather_repository_impl.dart';
 import 'domain/repositories/location_repository.dart';
 import 'domain/repositories/weather_repository.dart';
-import 'domain/usecases/get_current_weather_by_name.dart';
 import 'domain/usecases/get_current_weather_by_location.dart';
+import 'domain/usecases/get_current_weather_by_name.dart';
 
 final locator = GetIt.instance;
 

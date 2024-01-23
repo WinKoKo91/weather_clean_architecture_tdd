@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,21 +7,17 @@ import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sunshine/domain/entities/weather.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/air_pollution_event.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_state.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_state.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';
 import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
-import 'package:sunshine/presentation/home/bloc/location_event.dart';
 import 'package:sunshine/presentation/home/bloc/location_state.dart';
 import 'package:sunshine/presentation/home/pages/mobile/home_mobile_page.dart';
 import 'package:sunshine/presentation/home/widgets/weather_widget.dart';
 
 import '../mock_bloc.dart';
-import 'forecast_page_test.dart';
 
 
 void main() {

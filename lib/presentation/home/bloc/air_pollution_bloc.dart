@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:sunshine/domain/usecases/get_today_air_pollution.dart';
 
 import '../../../domain/entities/air_pollution_entity.dart';

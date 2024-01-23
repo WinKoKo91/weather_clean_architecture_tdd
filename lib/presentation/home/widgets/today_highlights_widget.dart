@@ -30,12 +30,36 @@ class TodayHighlightsWidget extends StatelessWidget {
                     sunset: state.sunset,
                     sunrise: state.sunrise,
                   ),
-                  HumidityWidget(
-                    humidity: state.data.humidity.toString(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: HumidityWidget(
+                          humidity: state.data.humidity.toString(),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: PressureWidget(
+                              pressure: state.data.pressure.toString())),
+                    ],
                   ),
-                  PressureWidget(pressure: state.data.pressure.toString()),
-                  VisibilityWidget(visibility: state.visibility),
-                  FeelsLikeWidget(feelsLike: state.data.feelsLike.toString()),
+                  Row(
+                    children: [
+                      Expanded(
+                          child:
+                              VisibilityWidget(visibility: state.visibility)),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                        child: FeelsLikeWidget(
+                            feelsLike: state.data.feelsLike.toString()),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

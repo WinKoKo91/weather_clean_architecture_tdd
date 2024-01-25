@@ -1,20 +1,18 @@
-# sunshine
+# Sun Shine
 
-A new Flutter project.
+A Flutter Weather App, developed with Bloc, Clean Architecture Get_it and TDD(Text Driven Development).
 
-## Getting Started
+### Refer
+- UI and Project flow - [Real-time Weather App Using Vanilla JavaScript and API](https://www.youtube.com/watch?v=QMwyNnjAils&t=4506s)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### Open Weather Map API Key is required.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+In order for the Sunshine app to function properly as of October 18th, 2015 an API key for openweathermap.org must be included with the build.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+We recommend that each student obtain a key via the following [instructions](http://openweathermap.org/appid#use), and include the unique key for the build by adding the following line to [USER_HOME]/.gradle/gradle.properties
 
+`apiKey="<UNIQUE_API_KEY">` in lib/core/constants.dart file
 
 # Clean Architecture
 

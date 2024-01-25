@@ -45,7 +45,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is WeatherLoaded) {
-        if (searchController.text.isEmpty) {
+        if (searchController.text.isEmpty ||
+            searchController.text != state.data.cityName) {
           searchController.text = state.data.cityName;
         }
       }
@@ -55,7 +56,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           return BlocConsumer<LocationBloc, LocationState>(
             listener: (context, state) {
               if (state is CurrentLocationLoaded) {
-                onGetCurrentLocation(state.lat, state.lon);
+                context
+                    .read<HomeBloc>()
+                    .add(WeatherByLocation(state.lat, state.lon));
               }
             },
             builder: (context, state) {
@@ -123,8 +126,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                             onTap: () {
                               controller.closeView(location.name!);
                               FocusScope.of(context).unfocus();
-                              onGetCurrentLocation(
-                                  location.lat!, location.lon!);
+                              context.read<HomeBloc>().add(WeatherByLocation(
+                                  location.lat!, location.lon!));
                             },
                           );
                         });
@@ -153,15 +156,5 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         context.read<LocationBloc>().add(OnCitySubmit(searchController.text));
       });
     }
-  }
-
-  void onGetCurrentLocation(double lat, double lon) {
-    context.read<HomeBloc>().add(WeatherByLocation(lat, lon));
-
-    context.read<ForecastBloc>().add(OnGetForecastEvent(lat: lat, lon: lon));
-
-    context
-        .read<AirPollutionBloc>()
-        .add(OnGetAirPollutionEvent(lat: lat, lon: lon));
   }
 }

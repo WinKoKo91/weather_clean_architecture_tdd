@@ -17,7 +17,7 @@ class TodayHighlightsWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Card(
             child: Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -38,8 +38,8 @@ class TodayHighlightsWidget extends StatelessWidget {
                           humidity: state.data.humidity.toString(),
                         ),
                       ),
-                      SizedBox(
-                        width: 16,
+                      const SizedBox(
+                        width: 8,
                       ),
                       Expanded(
                           child: PressureWidget(
@@ -51,8 +51,8 @@ class TodayHighlightsWidget extends StatelessWidget {
                       Expanded(
                           child:
                               VisibilityWidget(visibility: state.visibility)),
-                      SizedBox(
-                        width: 16,
+                      const SizedBox(
+                        width: 8,
                       ),
                       Expanded(
                         child: FeelsLikeWidget(

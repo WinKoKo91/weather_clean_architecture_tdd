@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constants.dart';
+import '../bloc/air_pollution_bloc.dart';
+import '../bloc/air_pollution_event.dart';
+import '../bloc/forecast_bloc.dart';
+import '../bloc/forecast_event.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
 
@@ -10,8 +14,16 @@ class WeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (context, state) {
+        if (state is WeatherLoaded) {
+          context.read<ForecastBloc>().add(
+              OnGetForecastEvent(lat: state.data.lat, lon: state.data.lon));
 
+          context.read<AirPollutionBloc>().add(
+              OnGetAirPollutionEvent(lat: state.data.lat, lon: state.data.lon));
+        }
+      },
       builder: (context, state) {
         if (state is WeatherLoadFailure) {
           return Text(state.message);

@@ -24,7 +24,7 @@ class AirQualityWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.background.withOpacity(0.4),
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
+                  borderRadius: const BorderRadius.all(Radius.circular(8))),
               child: Column(
                 children: [
                   Row(
@@ -41,7 +41,7 @@ class AirQualityWidget extends StatelessWidget {
                             const BorderRadius.all(Radius.circular(20))),
                         child: Text(
                           state.qualitativeName!,
-                          style: TextStyle(color: Colors.black, fontSize: 12),
+                          style:const TextStyle(color: Colors.black, fontSize: 12),
                         ),
                       )
                     ],

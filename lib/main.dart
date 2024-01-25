@@ -5,6 +5,7 @@ import 'package:sunshine/core/utils/app_bloc_observer.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
+import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -40,7 +41,8 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
-        title: 'Sun Shine',
+        title: 'Sunshine',
+        debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.dark,
         theme: ThemeData.dark(
           useMaterial3: true,
@@ -53,6 +55,21 @@ class MyApp extends StatelessWidget {
 
 final router = GoRouter(
   routes: [
-    GoRoute(path: '/', builder: (_, __) => const HomePage(), routes: []),
+    GoRoute(
+      path: '/',
+      builder: (_, state) {
+        return const HomePage();
+      },
+    ),
+    GoRoute(
+      path: '/:city',
+      builder: (context, state) {
+        final cityName = state.pathParameters['city'];
+        if (cityName != null && cityName.isNotEmpty) {
+          context.read<HomeBloc>().add(GetWeatherByName(cityName!));
+        }
+        return const HomePage();
+      },
+    ),
   ],
 );

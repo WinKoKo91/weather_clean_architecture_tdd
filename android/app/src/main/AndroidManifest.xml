@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name="${applicationName}"
@@ -32,14 +32,17 @@
                 android:name="flutter_deeplinking_enabled"
                 android:value="true" />
 
-            <intent-filter android:autoVerify="true"  tools:targetApi="m">
+            <intent-filter
+                android:autoVerify="true"
+                tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="https" />
-                <data android:host="sun-shine-402314.web.app" android:pathPrefix="/weather"/>
-                <data android:host="sun-shine-402314.firebaseapp.com" android:pathPrefix="/weather"/>
+                <data android:host="sun-shine-402314.web.app" />
+                <data android:host="sun-shine-402314.firebaseapp.com" />
 
             </intent-filter>
 

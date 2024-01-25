@@ -44,7 +44,7 @@ class SunriseAndSunsetWidget extends StatelessWidget {
                       Text(
                         sunrise,
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                            fontSize: 18, fontWeight: FontWeight.w500),
                       )
                     ],
                   ),
@@ -67,7 +67,7 @@ class SunriseAndSunsetWidget extends StatelessWidget {
                       Text(
                         sunset,
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                            fontSize: 19, fontWeight: FontWeight.w500),
                       )
                     ],
                   ),

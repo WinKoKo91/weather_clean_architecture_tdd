@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../core/usecase/usecase.dart';
 import '../../core/utils/typedef.dart';
-import '../entities/weather.dart';
+import '../entities/weather_entity.dart';
 import '../repositories/weather_repository.dart';
 
 class GetCurrentWeatherByLocationUseCase
@@ -19,9 +19,9 @@ class GetCurrentWeatherByLocationUseCase
 }
 
 class CurrentLocationsParams extends Equatable {
-  final double lat, lon;
+  final double? lat, lon;
 
-  const CurrentLocationsParams({required this.lat, required this.lon});
+  const CurrentLocationsParams({ this.lat,  this.lon});
 
   @override
   List<Object?> get props => [lat, lon];

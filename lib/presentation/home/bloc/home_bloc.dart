@@ -1,7 +1,8 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/transformers.dart';
-import 'package:sunshine/domain/entities/weather.dart';
+import 'package:sunshine/domain/entities/weather_entity.dart';
 import 'package:sunshine/domain/usecases/get_current_weather_by_location.dart';
 
 import '../../../domain/usecases/get_current_weather_by_name.dart';
@@ -37,6 +38,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(filterData(data));
       });
     }, transformer: debounce(const Duration(milliseconds: 500)));
+
+    on<WeatherOffline>((event, emit) async {
+      try {
+        final connectivityResult = await (Connectivity().checkConnectivity());
+        if (connectivityResult == ConnectivityResult.none) {
+          emit(WeatherLoading());
+          final result = await _getCurrentWeatherByLocationUseCase(
+              const CurrentLocationsParams());
+
+          result.fold((failure) {
+            emit(WeatherLoadFailure(failure.message));
+          }, (data) {
+            emit(filterData(data));
+          });
+        } else {
+          emit(HomeInitState());
+        }
+      } catch (e) {
+        print(e);
+      }
+    });
   }
 
   WeatherLoaded filterData(WeatherEntity data) {

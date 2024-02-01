@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sunshine/core/utils/app_bloc_observer.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';
@@ -12,10 +15,12 @@ import 'package:url_strategy/url_strategy.dart';
 import 'injection_container.dart';
 import 'presentation/home/pages/home_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
-  setupLocator();
+
   Bloc.observer = AppBlocObserver();
+  await setupLocator();
   runApp(const MyApp());
 }
 

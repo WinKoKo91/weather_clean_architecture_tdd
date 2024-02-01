@@ -26,6 +26,14 @@ class WeatherByLocation extends HomeEvent {
 }
 
 
+class WeatherOffline extends HomeEvent {
+
+  const WeatherOffline();
+
+
+}
+
+
 class GetForecastEvent extends HomeEvent {
   final double lat, lon;
 

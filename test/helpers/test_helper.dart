@@ -1,7 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
-import 'package:sunshine/data/datasource/location_remote_data_source.dart';
-import 'package:sunshine/data/datasource/weather_remote_data_source.dart';
+import 'package:sunshine/data/datasource/local/weather_local_data_source.dart';
+import 'package:sunshine/data/datasource/remote/location_remote_data_source.dart';
+import 'package:sunshine/data/datasource/remote/weather_remote_data_source.dart';
 import 'package:sunshine/domain/repositories/location_repository.dart';
 import 'package:sunshine/domain/repositories/weather_repository.dart';
 import 'package:sunshine/domain/usecases/get_current_weather_by_location.dart';
@@ -17,6 +18,7 @@ import 'package:sunshine/presentation/home/bloc/location_bloc.dart';
   [
     WeatherRepository,
     WeatherRemoteDataSource,
+    WeatherLocalDataSource,
     GetCurrentWeatherByNameUseCase,
     GetCurrentWeatherByLocationUseCase,
     GetFiveDayForecastUseCase,

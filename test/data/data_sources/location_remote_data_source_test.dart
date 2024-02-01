@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/constants.dart';
 import 'package:sunshine/core/error/exception.dart';
-import 'package:sunshine/data/datasource/location_remote_data_source.dart';
+import 'package:sunshine/data/datasource/remote/location_remote_data_source.dart';
 import 'package:sunshine/data/model/location_model.dart';
 
 import '../../helpers/json_reader.dart';

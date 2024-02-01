@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,11 +55,12 @@ class WeatherWidget extends StatelessWidget {
                               fontSize: 40.0, fontWeight: FontWeight.bold),
                         ),
                         Flexible(
-                          child: Image(
-                            image: NetworkImage(
-                              Urls.weatherIcon(
-                                state.data.iconCode,
-                              ),
+                          child: CachedNetworkImage(
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            imageUrl: Urls.weatherIcon(
+                              state.data.iconCode,
                             ),
                           ),
                         ),

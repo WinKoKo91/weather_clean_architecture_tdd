@@ -1,6 +1,6 @@
 import '../../core/usecase/usecase.dart';
 import '../../core/utils/typedef.dart';
-import '../entities/weather.dart';
+import '../entities/weather_entity.dart';
 import '../repositories/weather_repository.dart';
 
 class GetCurrentWeatherByNameUseCase

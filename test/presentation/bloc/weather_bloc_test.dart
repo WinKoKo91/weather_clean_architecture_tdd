@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sunshine/core/error/failure.dart';
-import 'package:sunshine/domain/entities/weather.dart';
+import 'package:sunshine/domain/entities/weather_entity.dart';
 import 'package:sunshine/presentation/home/bloc/home_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/home_event.dart';
 import 'package:sunshine/presentation/home/bloc/home_state.dart';

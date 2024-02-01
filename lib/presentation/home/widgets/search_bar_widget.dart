@@ -30,7 +30,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   void initState() {
     searchController.addListener(searchListener);
-
+    context.read<HomeBloc>().add(const WeatherOffline());
     super.initState();
   }
 
@@ -38,6 +38,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   void dispose() {
     searchController.removeListener(searchListener);
     searchController.dispose();
+
+
+
     super.dispose();
   }
 

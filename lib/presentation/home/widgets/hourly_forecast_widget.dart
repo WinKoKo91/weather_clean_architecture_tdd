@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,11 +19,11 @@ class HourlyForecastWidget extends StatelessWidget {
       }
 
       if (state is ForecastLoadedState) {
-        return  Column(
+        return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const  Padding(
+            const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
                 'Today at',
@@ -30,7 +31,7 @@ class HourlyForecastWidget extends StatelessWidget {
               ),
             ),
             HourlyTemperatureListWidget(list: state.hourlyList),
-            const  SizedBox(
+            const SizedBox(
               height: 8,
             ),
             HourlyWindListWidget(list: state.hourlyList),
@@ -44,12 +45,12 @@ class HourlyForecastWidget extends StatelessWidget {
 
 class HourlyWindListWidget extends StatelessWidget {
   const HourlyWindListWidget({
-    super.key, required this.
-    list,
+    super.key,
+    required this.list,
   });
 
-  final List<ForecastEntity>
-  list;
+  final List<ForecastEntity> list;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -57,17 +58,17 @@ class HourlyWindListWidget extends StatelessWidget {
       child: ListView.separated(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-
           itemBuilder: (context, index) {
             ForecastEntity item = list[index];
             return Padding(
               padding: EdgeInsets.only(
-                  left: index == 0 ? 16.0 : 0, right: index == list.length-1 ? 16.0 : 0),
+                  left: index == 0 ? 16.0 : 0,
+                  right: index == list.length - 1 ? 16.0 : 0),
               child: HourlyWidget(
                 time: item.hour!,
                 value: '${item.windSpeed}km',
                 image: RotationTransition(
-                  turns:  AlwaysStoppedAnimation(item.windDegree / 360),
+                  turns: AlwaysStoppedAnimation(item.windDegree / 360),
                   child: SvgPicture.asset(
                     'assets/icon/navigation.svg',
                     height: 40,
@@ -103,22 +104,22 @@ class HourlyTemperatureListWidget extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-
             ForecastEntity item = list[index];
             return Padding(
               padding: EdgeInsets.only(
-                  left: index == 0 ? 16.0 : 0, right: index == list.length-1 ? 16.0 : 0),
+                  left: index == 0 ? 16.0 : 0,
+                  right: index == list.length - 1 ? 16.0 : 0),
               child: HourlyWidget(
                 time: item.hour!,
                 value: '${item.temperature}°',
-                image: Image(
-                  image: NetworkImage(
-                    Urls.weatherIcon(
-                      item.iconCode,
-                    ),
+                image: CachedNetworkImage(
+                  imageUrl: Urls.weatherIcon(
+                    item.iconCode,
                   ),
                   height: 64,
                   width: 64,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
             );

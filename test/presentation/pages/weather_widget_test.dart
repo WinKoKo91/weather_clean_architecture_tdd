@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:sunshine/domain/entities/weather.dart';
+import 'package:sunshine/domain/entities/weather_entity.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_bloc.dart';
 import 'package:sunshine/presentation/home/bloc/air_pollution_state.dart';
 import 'package:sunshine/presentation/home/bloc/forecast_bloc.dart';

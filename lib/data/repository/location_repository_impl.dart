@@ -7,19 +7,21 @@ import '../../core/error/exception.dart';
 import '../../core/error/failure.dart';
 import '../../core/utils/typedef.dart';
 import '../../domain/repositories/location_repository.dart';
-import '../datasource/location_remote_data_source.dart';
+import '../datasource/remote/location_remote_data_source.dart';
 
 class LocationRepositoryImpl extends LocationRepository {
-  final LocationRemoteDataSource locationRemoteDataSource;
+  final LocationRemoteDataSource locationDataSource;
 
-  LocationRepositoryImpl({required this.locationRemoteDataSource});
+
+
+  LocationRepositoryImpl({required this.locationDataSource});
 
   @override
   ResultFuture<List<LocationEntity>> searchCityListByName(
       String cityName) async {
     try {
       final result =
-          await locationRemoteDataSource.searchCityListByName(cityName);
+          await locationDataSource.searchCityListByName(cityName);
       return Right(result.map((e) => e.toEntity()).toList());
     } on ServerException catch (error) {
       return Left(ServerFailure(error.message ?? "An error has occurred"));

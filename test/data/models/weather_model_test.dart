@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sunshine/data/model/weather_model.dart';
-import 'package:sunshine/domain/entities/weather.dart';
+import 'package:sunshine/domain/entities/weather_entity.dart';
 
 import '../../helpers/json_reader.dart';
 

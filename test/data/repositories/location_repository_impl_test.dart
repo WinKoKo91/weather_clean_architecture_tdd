@@ -18,7 +18,7 @@ void main() {
   setUp(() {
     mockLocationRemoteDataSource = MockLocationRemoteDataSource();
     locationRepositoryImpl = LocationRepositoryImpl(
-      locationRemoteDataSource: mockLocationRemoteDataSource,
+      locationDataSource: mockLocationRemoteDataSource,
     );
   });
 
@@ -30,8 +30,6 @@ void main() {
         country: "MM",
         state: "Yangon")
   ];
-
-
 
   const testCityName = 'Yangon';
 

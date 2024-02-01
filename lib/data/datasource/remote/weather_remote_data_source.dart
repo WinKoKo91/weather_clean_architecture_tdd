@@ -4,10 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:sunshine/data/model/air_pollution_model.dart';
 
-import '../../core/constants.dart';
-import '../../core/error/exception.dart';
-import '../model/forecast_model.dart';
-import '../model/weather_model.dart';
+import '../../../core/constants.dart';
+import '../../../core/error/exception.dart';
+import '../../model/forecast_model.dart';
+import '../../model/weather_model.dart';
+
+
 
 abstract class WeatherRemoteDataSource {
   Future<WeatherModel> getCurrentWeather(String cityName);
@@ -20,6 +22,7 @@ abstract class WeatherRemoteDataSource {
   Future<AirPollutionResponseModel> getAirPollution(
       {required double lat, required double lon});
 }
+
 
 class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
   final http.Client client;

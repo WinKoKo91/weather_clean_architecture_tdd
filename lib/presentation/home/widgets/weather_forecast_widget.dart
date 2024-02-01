@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sunshine/domain/entities/forecast_entity.dart';
@@ -43,16 +44,18 @@ class WeatherForecastWidget extends StatelessWidget {
                       leading: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Image(
+
+                          CachedNetworkImage(
                             width: 40,
                             height: double.infinity,
-                            image: NetworkImage(
-                              Urls.weatherIcon(
-                                forecast.iconCode,
-                              ),
+                            imageUrl: Urls.weatherIcon(
+                              forecast.iconCode,
                             ),
+                            placeholder: (context, url) => CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
                             fit: BoxFit.cover,
                           ),
+
                           const SizedBox(
                             width: 4,
                           ),

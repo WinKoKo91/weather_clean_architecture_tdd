@@ -57,7 +57,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       await ph.openAppSettings();
       return false;
     } else if (permissionStatus != ph.PermissionStatus.granted) {
-      final status =   await ph.Permission.location.request();
+      final status = await ph.Permission.location.request();
       return status == ph.PermissionStatus.granted;
     } else {
       return true;

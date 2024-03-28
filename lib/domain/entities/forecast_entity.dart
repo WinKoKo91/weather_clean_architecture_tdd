@@ -21,7 +21,6 @@ class ForecastResponseEntity extends Equatable {
 
 @HiveType(typeId: 2)
 class ForecastEntity extends Equatable {
-
   @HiveField(0)
   final String iconCode;
 
@@ -41,19 +40,20 @@ class ForecastEntity extends Equatable {
   String? date;
 
   @HiveField(6)
-  String?day;
+  String? day;
 
   @HiveField(7)
-  String?hour;
+  String? hour;
 
-  ForecastEntity({required this.iconCode,
-    required this.dt,
-    required this.windDegree,
-    required this.windSpeed,
-    required this.temperature,
-    this.hour,
-    this.day,
-    this.date});
+  ForecastEntity(
+      {required this.iconCode,
+      required this.dt,
+      required this.windDegree,
+      required this.windSpeed,
+      required this.temperature,
+      this.hour,
+      this.day,
+      this.date});
 
   @override
   List<Object?> get props =>

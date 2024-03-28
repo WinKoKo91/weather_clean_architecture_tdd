@@ -53,6 +53,7 @@ class ForecastBloc extends Bloc<ForecastEvent, ForecastState> {
 
     DateTime datetime =
         DateTime.fromMillisecondsSinceEpoch(forecastEntity.dt * 1000);
+
     forecastEntity.date = f.format(datetime);
     forecastEntity.day = weekdayFormatter.format(datetime);
     forecastList.add(forecastEntity);
@@ -97,10 +98,8 @@ class ForecastBloc extends Bloc<ForecastEvent, ForecastState> {
       int firstForecastTimestamp = firstForecastEntity.dt;
 
       DateTime datetime = DateTime.fromMillisecondsSinceEpoch(e.dt * 1000);
-
       DateTime firstDatetime =
           DateTime.fromMillisecondsSinceEpoch(firstForecastTimestamp * 1000);
-
       int hour = datetime.difference(firstDatetime).inHours;
 
       if (hour <= 24) {

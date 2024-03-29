@@ -71,7 +71,7 @@ void main() {
         windSpeed: 1.97,
         date: '10 Jan',
         day: 'Wednesday',
-        hour: '6 AM'), //Remote is 6 AM, local is 12 PM
+        hour: '1 PM'), //Remote is 6 AM, local is 12 PM
   ];
 
   test('initial state should be empty', () {

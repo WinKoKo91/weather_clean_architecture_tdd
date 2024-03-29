@@ -1,6 +1,6 @@
 # Sun Shine
 
-A Flutter Weather App, developed with Bloc, Clean Architecture Get_it and TDD(Text Driven Development).
+A Flutter Weather App, developed with Bloc, Clean Architecture Get_it and TDD(Test Driven Development).
 
 ### Refer
 - UI and Project flow - [Real-time Weather App Using Vanilla JavaScript and API](https://www.youtube.com/watch?v=QMwyNnjAils&t=4506s)

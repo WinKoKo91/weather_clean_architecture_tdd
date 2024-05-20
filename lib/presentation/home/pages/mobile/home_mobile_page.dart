@@ -36,7 +36,7 @@ class HomeMobilePage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
           child: Column(
         children: [
           WeatherWidget(),

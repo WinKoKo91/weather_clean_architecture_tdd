@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sunshine/presentation/home/widgets/weather_forecast_widget.dart';
 
 import '../../widgets/hourly_forecast_widget.dart';
+import '../../widgets/powered_by_widget.dart';
 import '../../widgets/search_bar_widget.dart';
 import '../../widgets/today_highlights_widget.dart';
 import '../../widgets/weather_widget.dart';
@@ -35,35 +37,40 @@ class HomeTabletPage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(
-              flex: 2,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    WeatherWidget(),
-                    WeatherForecastWidget(),
-                  ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        child: ListView(
+          children: const [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        WeatherWidget(),
+                        WeatherForecastWidget(),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Flexible(
-              flex: 3,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TodayHighlightsWidget(),
-                    HourlyForecastWidget(),
-                  ],
+                Flexible(
+                  flex: 3,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TodayHighlightsWidget(),
+                        HourlyForecastWidget(),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
+            PoweredByWidget(),
           ],
         ),
       ),
